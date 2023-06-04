@@ -1,0 +1,44 @@
+.header {
+  height: var(--main-header-height);
+  margin: 0;
+  background: var(--bg-color);
+}
+
+.slogan {
+  font-size: 52px;
+  font-weight: bold;
+  text-transform: uppercase;
+
+  font-family: 'Alfa Slab One', cursive;
+
+  display: flex;
+  justify-content: center;
+  letter-spacing: 0.1em;
+  height: 100%;
+}
+
+.star {
+  color: var(--primary-color);
+  margin-top: -5px;
+  color: transparent;
+  background-clip: text;
+  background-image: linear-gradient(71.78deg,#fc540c 27.87%,#E55807 52.56%,#FFB84C 74.58%);
+}
+
+.wars {
+  color: var(--secondary-color);
+  margin-top: 5px;
+  color: transparent;
+  background-clip: text;
+  background-image: linear-gradient(71.78deg,#fc540c 27.87%,#E55807 52.56%,#FFB84C 74.58%);
+}
+
+.vertical {
+  position: relative;
+  width: 25px;
+  background: var(--inverted-bg-color);
+  margin-right: 20px;
+  margin-left: 20px;
+  height: 100%;
+  transform: skew(-25deg);
+}
