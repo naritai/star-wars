@@ -1,7 +1,14 @@
 .header {
-  height: var(--main-header-height);
-  margin: 0;
-  background: var(--bg-color);
+}
+
+.link {
+  font-size: 1.5em;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 .slogan {
