@@ -1,5 +1,5 @@
-import { AppRouter } from 'app/providers/AppRouter';
-import { Header } from 'widgets/Header/ui/Header';
+import { AppRouter } from 'app/providers/app-router';
+import { Header } from 'widgets/header/ui/Header';
 import cls from './App.module.scss';
 
 export function App() {

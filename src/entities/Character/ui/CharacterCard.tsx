@@ -1,5 +1,7 @@
 import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
 import Color from "color";
+import { useNavigate } from "react-router-dom";
+import { AppRoutes } from "shared/config/routeConfig";
 
 const actionAreaStyles = {
   transition: '0.2s',
@@ -20,27 +22,28 @@ const cardStyles = {
 }
 
 export const CharacterCard = ({ classes, data }: any) => {
-  const { 
-    name, height, mass, hairColor, skinColor, eyeColor, birthDate, gender, image
-  } = data;
+  const { name, image, id } = data;
+  const navigate = useNavigate();
+
+  const handleCharacterClick = () => {
+    navigate(`/${AppRoutes.CHARACTERS}/${id}`);
+  }
 
   return (
-    <div>
-      <CardActionArea sx={actionAreaStyles}>
-        <Card sx={cardStyles}>
-          <CardMedia
-            sx={{ height: 280, objectFit: 'cover' }}
-            image={image}
-            title={name}
-            component="img"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h6" component="div" align="center">
-              {name}
-            </Typography>
-          </CardContent>
-        </Card>
-      </CardActionArea>
-    </div>
+    <CardActionArea sx={actionAreaStyles} onClick={handleCharacterClick}>
+      <Card sx={cardStyles}>
+        <CardMedia
+          sx={{ height: 280, objectFit: 'cover' }}
+          image={image}
+          title={name}
+          component="img"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h6" component="div" align="center">
+            {name}
+          </Typography>
+        </CardContent>
+      </Card>
+    </CardActionArea>
   )
 }
