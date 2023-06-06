@@ -1,39 +1,63 @@
 import { classNames } from 'shared/lib/classNames';
 import cls from './CharactersPage.module.scss';
-import { CharacterCard, charactersActions } from 'entities/character';
-import Grid from '@mui/material/Unstable_Grid2';
+import { charactersActions, getCharactersStatus } from 'entities/character';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCharacters } from 'entities/character';
-import { Button } from '@mui/material';
+import {  Pagination } from '@mui/material';
+import { ChangeEvent, useEffect } from 'react';
+import { FetchStatus } from 'shared/api/types';
+import { fetchCharacters } from 'entities/character/api';
+import { AppDispatch } from 'app/providers/store-provider';
+import { CharacterList } from 'widgets/character-list';
+import { CharacterSearch } from 'features/character-search';
+import { getCharactersCount, getCharactersPage } from 'entities/character/model/selectors/characterSelectors';
 
 interface CharactersPageProps { 
-   className?: string; 
+  className?: string; 
 }
 
-const gridStyles = {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center'
+const paginationStyles = {
+  margin: 4
 }
 
-export default function CharactersPage({ className }: CharactersPageProps): JSX.Element {
-  const { items } = useSelector(getCharacters);
-  const dispatch = useDispatch();
+function Paginator() {
+  const page = useSelector(getCharactersPage);
+  const count = useSelector(getCharactersCount);
+  const dispatch = useDispatch<AppDispatch>();
 
-  const handleSearch = () => {
-    dispatch(charactersActions.charactersFiltered('Luke'))
+  const handlePageChange = (_: ChangeEvent<unknown>, page: number) => {
+    dispatch(charactersActions.pageUpdated(page));
+    dispatch(fetchCharacters());
   }
 
   return (
+    <Pagination
+      variant='outlined'
+      shape='rounded'
+      sx={paginationStyles}
+      count={Math.ceil(count! / 10)}
+      color="secondary"
+      size="large"
+      page={page!}
+      onChange={handlePageChange}
+    />
+  )
+}
+
+export default function CharactersPage({ className }: CharactersPageProps): JSX.Element {
+  const status = useSelector(getCharactersStatus);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    if (status === FetchStatus.IDLE) {
+      dispatch(fetchCharacters());
+    }
+  }, [status, dispatch]);
+
+  return (
     <div className={classNames(cls.characterspage, {}, [className])}>
-      <Button variant='contained' onClick={handleSearch}>Find Luke!</Button>
-      <Grid sx={gridStyles} container spacing={3} maxWidth={900} columns={{ xs: 12, md: 6, lg: 4 }}>
-        {items.map((character) => (
-          <Grid key={character.name} display="flex" justifyContent="center" alignItems="center">
-            <CharacterCard data={character} />
-          </Grid>
-        ))}
-      </Grid>
+      <CharacterSearch />
+      <Paginator />
+      <CharacterList />
     </div>
   )
 }

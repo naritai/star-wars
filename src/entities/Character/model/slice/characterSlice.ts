@@ -2,38 +2,52 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Character } from "../types/characterSchema";
 import { mockCharacters } from "./mock";
 import { FetchStatus } from "shared/api/types";
+import { fetchCharacters } from "entities/character/api";
 
 export interface CharactersState {
   items: Character[];
   status: FetchStatus;
   error: string | null;
+  count: number | null;
+  search: string | null;
+  page: number | null;
 }
 
 const initialState: CharactersState = {
   items: mockCharacters as Character[],
   status: FetchStatus.IDLE,
-  error: null
+  error: null,
+  count: 1,
+  page: 1,
+  search: '',
 }
 
 export const charactersSlice = createSlice({
   name: 'characters',
   initialState,
   reducers: {
-    charactersFiltered: (state, action: PayloadAction<string>) => {
-      const { payload } = action;
-      return {
-        ...state,
-        items: state.items.filter(({ name }: Character) => {
-          return name.toLowerCase().includes(payload.toLowerCase());
-        })
-      }
+    pageUpdated: (state, action: PayloadAction<number>) => {
+      state.page = action.payload;
     },
-    characterUpdated: (state, action: PayloadAction<Partial<Character>, string>) => {
-      const { id, ...rest } = action.payload;
-
-      // save charater + update local storage!
-
-    }
+    searchUpdated: (state, action: PayloadAction<string>) => {
+      state.search = action.payload;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchCharacters.pending, (state) => {
+        state.status = FetchStatus.LOADING;
+      })
+      .addCase(fetchCharacters.fulfilled, (state, action) => {
+        state.status = FetchStatus.SUCCEDED;
+        const { items, count } = action.payload;
+        state.items = items;
+        state.count = count;
+      })
+      .addCase(fetchCharacters.rejected, (state, action) => {
+        state.status = FetchStatus.ERROR;
+        state.error = action.error.message ?? null;
+      })
   }
 });
 

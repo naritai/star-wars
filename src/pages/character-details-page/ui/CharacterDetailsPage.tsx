@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
-import { getCharacter } from 'entities/character/model/selectors/getCharacter/getCharacter';
 import { StateSchema } from 'app/providers/store-provider';
+import { getCharacterById } from 'entities/character';
 
 interface CharacterDetailsPageProps { 
   className?: string; 
@@ -19,7 +19,7 @@ const gridStyles = {
 
 export default function CharacterDetailsPage({ className }: CharacterDetailsPageProps): JSX.Element {
   const { id } = useParams();
-  const character = useSelector(state => getCharacter(state as StateSchema, Number(id)));
+  const character = useSelector(state => getCharacterById(state as StateSchema, Number(id)));
 
   if (!character) {
     return <div>Character not found with provided id: {id}</div>

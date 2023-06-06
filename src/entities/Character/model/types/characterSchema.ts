@@ -1,6 +1,27 @@
+export const enum Gender {
+  MALE = 'male',
+  FEMALE = 'female',
+  NOT_AVAILABLE = 'n/a'
+}
 
-
-// TODO: enrich types with unions, enums for different fields: colors, years, gender
+export interface RawCharacter {
+  birth_year: string;
+  created: Date;
+  edited: Date;
+  eye_color: string;
+  films: string[];
+  gender: Gender;
+  hair_color: string;
+  height: string;
+  homeworld: string;
+  mass: string;
+  name: string;
+  skin_color: string;
+  species: string[];
+  starships: string[];
+  url: string;
+  vehicles: string[];
+}
 
 export interface Character {
   id: number;
@@ -11,6 +32,6 @@ export interface Character {
   skinColor: string;
   eyeColor: string;
   birthEear: string;
-  gender: string,
+  gender: Gender,
   image: string
 }
