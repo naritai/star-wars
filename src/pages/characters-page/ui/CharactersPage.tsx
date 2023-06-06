@@ -29,6 +29,10 @@ function Paginator() {
     dispatch(fetchCharacters());
   }
 
+  if (count === 0) {
+    return null;
+  }
+
   return (
     <Pagination
       variant='outlined'

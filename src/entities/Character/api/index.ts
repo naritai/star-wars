@@ -34,7 +34,7 @@ function transformCharacters(raw: RawCharacter[]): Character[] {
       hairColor: hair_color,
       skinColor: skin_color,
       eyeColor: eye_color,
-      birthEear: birth_year,
+      birthYear: birth_year,
     }
   });
 }

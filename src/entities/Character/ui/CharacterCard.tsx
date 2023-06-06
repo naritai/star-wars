@@ -21,7 +21,7 @@ const cardStyles = {
   },
 }
 
-export const CharacterCard = ({ classes, data }: any) => {
+export const CharacterCard = ({ data }: any) => {
   const { name, image, id } = data;
   const navigate = useNavigate();
 

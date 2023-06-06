@@ -25,7 +25,11 @@ export function CharacterList({ className }: CharacterListProps): JSX.Element {
   }
 
   if (error) {
-    return <div>Something wen wrong...</div>
+    return <div>Something went wrong...</div>
+  }
+
+  if (characters.length === 0) {
+    return (<div>No characters found...</div>)
   }
 
   return (

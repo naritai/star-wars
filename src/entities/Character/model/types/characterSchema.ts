@@ -31,7 +31,7 @@ export interface Character {
   hairColor: string;
   skinColor: string;
   eyeColor: string;
-  birthEear: string;
+  birthYear: string;
   gender: Gender,
   image: string
 }
