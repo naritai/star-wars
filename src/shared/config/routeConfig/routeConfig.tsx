@@ -15,7 +15,7 @@ const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.MAIN]: '/',
   [AppRoutes.CHARACTERS]: '/characters',
   [AppRoutes.CHARACTER_DETAILS]: '/characters/:id',
-  [AppRoutes.CHARACTER_EDIT]: '/edit-character/:id',
+  [AppRoutes.CHARACTER_EDIT]: '/characters/:id/edit',
   [AppRoutes.NOTFOUNDPAGE]: '*',
 }
 
@@ -31,6 +31,10 @@ export const routeConfig: RouteObject[] = [
   {
     path: RoutePath.character_details,
     element: <CharacterDetailsPage />,
+  },
+  {
+    path: RoutePath.character_edit,
+    element: <CharacterDetailsPage edit={true} />,
   },
   {
     path: RoutePath.notfound,

@@ -23,6 +23,12 @@ export const getCharactersSearch = (state: StateSchema): string | null => state.
 
 export const getCharactersPage = (state: StateSchema): number | null => state.characters.page;
 
+export const getCharacterOnEdit = (state: StateSchema): Character | null => state.characters.characterOnEdit;
+
+export const getCharacterOnEditError = (state: StateSchema): string | null => state.characters.characterOnEditError;
+
+export const getCharacterOnEditStatus = (state: StateSchema): FetchStatus => state.characters.characterOnEditStatus;
+
 
 
 

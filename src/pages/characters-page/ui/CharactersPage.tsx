@@ -10,6 +10,7 @@ import { AppDispatch } from 'app/providers/store-provider';
 import { CharacterList } from 'widgets/character-list';
 import { CharacterSearch } from 'features/character-search';
 import { getCharactersCount, getCharactersPage } from 'entities/character/model/selectors/characterSelectors';
+import { useSearchParams } from 'react-router-dom';
 
 interface CharactersPageProps { 
   className?: string; 
@@ -50,6 +51,14 @@ function Paginator() {
 export default function CharactersPage({ className }: CharactersPageProps): JSX.Element {
   const status = useSelector(getCharactersStatus);
   const dispatch = useDispatch<AppDispatch>();
+  const [params] = useSearchParams();
+  const page = params.get('page');
+
+  useEffect(() => {
+    if (page) {
+      dispatch(charactersActions.pageUpdated(Number(page)));
+    }
+  }, [page, dispatch]);
 
   useEffect(() => {
     if (status === FetchStatus.IDLE) {
