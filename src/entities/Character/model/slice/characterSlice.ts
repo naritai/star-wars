@@ -9,6 +9,7 @@ export interface CharactersState {
   status: FetchStatus;
   error: string | null;
   count: number | null;
+  countTotal: number | null;
   search: string | null;
   page: number | null;
   characterOnEdit: Character | null;
@@ -23,6 +24,7 @@ const initialState: CharactersState = {
   status: FetchStatus.IDLE,
   error: null,
   count: 1,
+  countTotal: null,
   page: 1,
   search: '',
 
@@ -41,6 +43,7 @@ export const charactersSlice = createSlice({
     },
     searchUpdated: (state, action: PayloadAction<string>) => {
       state.search = action.payload;
+      state.count = state.search === '' ? state.countTotal : state.count;
     },
     cacheUpdated: (state, action: PayloadAction<{ items: Character[], page: number }>) => {
       const { page, items } = action.payload;
@@ -57,9 +60,10 @@ export const charactersSlice = createSlice({
       })
       .addCase(fetchCharacters.fulfilled, (state, action) => {
         state.status = FetchStatus.SUCCEDED;
-        const { items, count } = action.payload;
+        const { items, count, page } = action.payload;
         state.items = items;
         state.count = count;
+        state.countTotal = page === 1 && state.search === '' ? count : state.countTotal;
       })
       .addCase(fetchCharacters.rejected, (state, action) => {
         state.status = FetchStatus.ERROR;

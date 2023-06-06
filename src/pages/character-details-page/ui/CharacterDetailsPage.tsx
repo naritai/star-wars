@@ -95,6 +95,10 @@ export default function CharacterDetailsPage({ className, edit = false }: Charac
     return <div>Something went wrong... sorry.</div>
   }
 
+  if (editableCharcterStatus === FetchStatus.LOADING) {
+    return <div>Loading character...</div>
+  }
+
   if (!character && !editableCharacter) {
     return <div>Character not found with provided id: {id}</div>
   }

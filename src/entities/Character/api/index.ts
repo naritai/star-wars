@@ -21,8 +21,8 @@ export const fetchCharacters = createAsyncThunk(
   const { characters } = getState() as RootState;
   const { search, page, cache, count } = characters;
 
-  if (page && cache[page]) {
-    return { items: cache[page], count };
+  if (!search && page && cache[page]) {
+    return { items: cache[page], count, page };
   }
 
   let response;
@@ -45,6 +45,7 @@ export const fetchCharacters = createAsyncThunk(
   const payload = {
     items: transformed,
     count: parsed.count,
+    page
   }
 
   return payload;

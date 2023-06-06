@@ -2,6 +2,8 @@ import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/m
 import Color from "color";
 import { useNavigate } from "react-router-dom";
 import { AppRoutes } from "shared/config/routeConfig";
+import { useLocalStorage } from "usehooks-ts";
+import { Character } from "../model/types/characterSchema";
 
 const actionAreaStyles = {
   transition: '0.2s',
@@ -22,8 +24,9 @@ const cardStyles = {
 }
 
 export const CharacterCard = ({ data }: any) => {
-  const { name, image, id } = data;
   const navigate = useNavigate();
+  const [LSCharacter] = useLocalStorage<Partial<Character>>(`characters:${data.id}`, data);
+  const { name, image, id } = LSCharacter ?? data;
 
   const handleCharacterClick = () => {
     navigate(`/${AppRoutes.CHARACTERS}/${id}`);

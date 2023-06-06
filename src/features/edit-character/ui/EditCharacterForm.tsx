@@ -35,7 +35,7 @@ export function EditCharacterForm({ className, character, onCancel }: EditCharac
 
   const onCharacterSave = (event: FormEvent) => {
     event.preventDefault();
-    setLSCharacter(formData);
+    setLSCharacter({ ...formData, image, id });
     onCancel();
   }
 
