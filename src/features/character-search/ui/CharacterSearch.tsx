@@ -27,11 +27,10 @@ export function CharacterSearch({ className }: CharacterSeacrhProps): JSX.Elemen
   }
 
   return (
-    <div className={classNames(cls.characterseacrh, {}, [className])}>
+    <section className={classNames(cls.characterseacrh, {}, [className])}>
       <Paper elevation={2} sx={{ padding: 2, width: '100%' }}>
         <Input value={searchValue} placeholder="search character by name" onChange={handleSearch} />
       </Paper>
-      
-    </div>
+    </section>
   )
 }

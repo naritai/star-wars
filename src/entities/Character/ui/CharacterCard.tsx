@@ -1,5 +1,4 @@
 import { Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
-import Color from "color";
 import { useNavigate } from "react-router-dom";
 import { AppRoutes } from "shared/config/routeConfig";
 import { useLocalStorage } from "usehooks-ts";
@@ -8,6 +7,7 @@ import { EntityId } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { selectCharacterById } from "../model/slice/charactersSlice";
 import { StateSchema } from "app/providers/store-provider";
+import cls from './CharacterCard.module.scss';
 
 const actionAreaStyles = {
   transition: '0.2s',
@@ -19,14 +19,8 @@ const actionAreaStyles = {
 const cardStyles = {
   width: 250,
   boxShadow: 'none',
-  '&:hover': {
-    boxShadow: `0 3px 9px 0 ${Color('#2a2830')
-      .rotate(-12)
-      .darken(0.2)
-      .fade(0.5)}`,
-  },
   '&:hover .character-name': {
-    color: 'primary.main'
+    color: 'orangered'
   }
 }
 
@@ -53,7 +47,7 @@ export const CharacterCard = ({ characterId }: CharacterCardProps) => {
 
   return (
     <CardActionArea sx={actionAreaStyles} onClick={handleCharacterClick}>
-      <Card sx={cardStyles}>
+      <Card sx={cardStyles} className={cls.test}>
         <CardMedia
           sx={{ height: 280, objectFit: 'cover' }}
           image={image}

@@ -13,8 +13,8 @@ export function Spinner({ className }: SpinnerProps): JSX.Element {
         <div></div>
         <div></div>
         <div></div>
+        </div>
       </div>
-    </div>
     </div>
   )
 }

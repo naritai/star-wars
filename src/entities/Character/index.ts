@@ -14,3 +14,5 @@ export {
   selectEditableCharacterState,
   editableCharacterCleared
 } from './model/slice/editableCharacterSlice';
+
+export { CHARACTERS_TEXT } from './constants';

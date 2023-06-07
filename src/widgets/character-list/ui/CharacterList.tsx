@@ -6,6 +6,9 @@ import { useSelector } from 'react-redux';
 import { FetchStatus } from 'shared/api/types';
 import { EntityId } from '@reduxjs/toolkit';
 import { Spinner } from 'widgets/spinner';
+import { Message } from 'shared/ui/message';
+import { CHARACTERS_TEXT } from 'entities/character';
+import { ERROR_TEXTS } from 'shared/constants';
 
 interface CharacterListProps { 
   className?: string; 
@@ -22,26 +25,26 @@ export function CharacterList({ className }: CharacterListProps): JSX.Element {
   const { status, error } = useSelector(selectCharactersState);
 
   if (status === FetchStatus.LOADING) {
-    return <Spinner />
+    return <Spinner className={cls.offsetter} />;
   }
 
   if (error) {
-    return <div>Something went wrong...</div>
+    return <Message className={cls.offsetter} text={ERROR_TEXTS.GENERAL_ERROR} error={true} />
   }
 
   if (characterIds.length === 0) {
-    return (<div>No characters found...</div>)
+    return <Message className={cls.offsetter} text={CHARACTERS_TEXT.NO_CHARACTERS_FOUND} />
   }
 
   return (
-    <div className={classNames(cls.characterlist, {}, [className])}>
+    <section className={classNames(cls.characterlist, {}, [className])}>
       <Grid sx={gridStyles} container spacing={3} maxWidth={900} columns={{ xs: 12, md: 6, lg: 4 }}>
         {characterIds.map((idx: EntityId) => (
-          <Grid key={idx} display="flex" justifyContent="center" alignItems="center">
+          <Grid key={idx} sx={gridStyles}>
             <CharacterCard characterId={idx} />
           </Grid>
         ))}
       </Grid>
-    </div>
+    </section>
   )
 }

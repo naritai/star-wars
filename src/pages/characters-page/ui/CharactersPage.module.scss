@@ -1,21 +1,6 @@
 .characterspage {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  // background: var(--bg-color);
-}
-
-.list {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-}
-
-.listItem {
-  width: 300px;
-  height: 250px;
-  border: 2px solid black;
-  margin: 20px;
+  min-height: var(--min-page-height);
 }

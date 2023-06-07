@@ -5,13 +5,13 @@ import { CssBaseline } from '@mui/material';
 
 export function App() {
   return (
-    <div className={cls.App}>
+    <section className={cls.App}>
       <CssBaseline />
       <Header />
       <main className='main-content'>
         <AppRouter />
       </main>
-    </div>
+    </section>
   );
 }
 

@@ -4,6 +4,7 @@ import { ReportOutlined } from '@mui/icons-material';
 import { Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { Link } from 'react-router-dom';
+import { ERROR_TEXTS } from 'shared/constants';
 
 interface ErrorPageProps { 
   className?: string; 
@@ -25,7 +26,7 @@ export function ErrorPage({ className }: ErrorPageProps): JSX.Element {
       </Box>
 
       <Box sx={centered}>
-        <Typography variant="h4">Sorry, an unexpected error has occurred.</Typography>
+        <Typography variant="h4">{ERROR_TEXTS.GENERAL_ERROR}</Typography>
         <Typography color="secondary" variant="h6" sx={{ flexGrow: 1 }} className={classNames(cls.link)}>
           Try reload the: {
             <Link to="/" reloadDocument={true}>

@@ -108,7 +108,7 @@ export default function CharacterDetailsPage({ className, edit = false }: Charac
   const { name, image } = resolvedCharacter;
 
   return (
-    <div className={classNames(cls.characterdetailspage, {}, [className])}>
+    <section className={classNames(cls.characterdetailspage, {}, [className])}>
       <Grid sx={gridStyles} container spacing={3} maxWidth={900} columns={{ xs: 12, md: 6, lg: 4 }}>
         <Grid>
           <Card sx={{ width: 350 }}>
@@ -136,6 +136,6 @@ export default function CharacterDetailsPage({ className, edit = false }: Charac
           </Card>
         </Grid>
       </Grid>
-    </div>
+    </section>
   )
 }

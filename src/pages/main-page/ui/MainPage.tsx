@@ -7,8 +7,8 @@ interface MainPageProps {
 
 export default function MainPage({ className }: MainPageProps): JSX.Element {
   return (
-    <div className={classNames(cls.mainpage, {}, [className])}>
+    <section className={classNames(cls.mainpage, {}, [className])}>
       <h1>MAIN PAGE!</h1>
-    </div>
+    </section>
   )
 }

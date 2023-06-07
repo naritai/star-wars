@@ -18,6 +18,9 @@ export const themeOptions: ThemeOptions = {
       main: '#5bd662',
       contrastText: '#2A2830',
     },
+    error: {
+      main: '#f4fb20eb'
+    },
     divider: '#434343',
     info: {
       main: '#5eb6e6',
