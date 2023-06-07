@@ -2,35 +2,24 @@ import { classNames } from 'shared/lib/classNames';
 import cls from './Header.module.scss';
 import { Box, AppBar, Toolbar, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { Slogan } from './Slogan';
 
 interface HeaderProps { 
   className?: string; 
 }
 
-{/* <nav>
-      <section>
-        <h1>Redux Essentials Example</h1>
-
-        <div className="navContent">
-          <div className="navLinks">
-            <Link to="/">Posts</Link>
-            <Link to="/users">Users</Link>
-          </div>
-        </div>
-      </section>
-    </nav> */}
-
 export function Header({ className }: HeaderProps): JSX.Element {
   return (
     <header className={classNames(cls.header, {}, [className])}>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static" color="secondary">
+        <AppBar position="static" sx={{ background: '#000' }}>
           <Toolbar>
               <Link to="/characters" className={classNames(cls.link)}>
-                <Typography color="secondary" variant="h6" sx={{ flexGrow: 1 }}>
+                <Typography fontWeight="bold" color="primary" variant="h6" sx={{ flexGrow: 1 }}>
                   Characters
                 </Typography>
               </Link>
+              <Slogan />
           </Toolbar>
         </AppBar>
       </Box>

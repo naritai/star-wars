@@ -5,6 +5,7 @@ import { CharacterCard, selectCharacterIds, selectCharactersState } from 'entiti
 import { useSelector } from 'react-redux';
 import { FetchStatus } from 'shared/api/types';
 import { EntityId } from '@reduxjs/toolkit';
+import { Spinner } from 'widgets/spinner';
 
 interface CharacterListProps { 
   className?: string; 
@@ -21,7 +22,7 @@ export function CharacterList({ className }: CharacterListProps): JSX.Element {
   const { status, error } = useSelector(selectCharactersState);
 
   if (status === FetchStatus.LOADING) {
-    return <div>Loading CHARACTERS...</div>;
+    return <Spinner />
   }
 
   if (error) {

@@ -1,4 +1,8 @@
 .header {
+  box-sizing: content-box;
+  background: #000;
+  height: var(--main-header-height);
+  border-bottom: 10px solid #c02020;
 }
 
 .link {
@@ -12,21 +16,20 @@
 }
 
 .slogan {
-  font-size: 52px;
-  font-weight: bold;
-  text-transform: uppercase;
-
-  font-family: 'Alfa Slab One', cursive;
-
   display: flex;
   justify-content: center;
+  align-items: center;
   letter-spacing: 0.1em;
   height: 100%;
+  font-size: 42px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-family: 'Alfa Slab One', cursive;
+  margin-left: auto;
 }
 
 .star {
   color: var(--primary-color);
-  margin-top: -5px;
   color: transparent;
   background-clip: text;
   background-image: linear-gradient(71.78deg,#fc540c 27.87%,#E55807 52.56%,#FFB84C 74.58%);
@@ -34,18 +37,16 @@
 
 .wars {
   color: var(--secondary-color);
-  margin-top: 5px;
   color: transparent;
   background-clip: text;
   background-image: linear-gradient(71.78deg,#fc540c 27.87%,#E55807 52.56%,#FFB84C 74.58%);
 }
 
 .vertical {
-  position: relative;
-  width: 25px;
-  background: var(--inverted-bg-color);
-  margin-right: 20px;
-  margin-left: 20px;
-  height: 100%;
+  height: var(--main-header-height);
+  width: 20px;
+  background: #c02020;
+  margin-right: 25px;
+  margin-left: 25px;
   transform: skew(-25deg);
 }

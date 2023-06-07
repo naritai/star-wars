@@ -2,7 +2,7 @@ import { classNames } from 'shared/lib/classNames';
 import cls from './CharactersPage.module.scss';
 import { charactersActions, selectCharactersState } from 'entities/character';
 import { useDispatch, useSelector } from 'react-redux';
-import {  Pagination } from '@mui/material';
+import { Pagination } from '@mui/material';
 import { ChangeEvent, useEffect } from 'react';
 import { FetchStatus } from 'shared/api/types';
 import { fetchCharacters } from 'entities/character/api';
@@ -38,7 +38,7 @@ function Paginator() {
       shape='rounded'
       sx={paginationStyles}
       count={Math.ceil(count! / 10)}
-      color="secondary"
+      color="primary"
       size="large"
       page={currentPage!}
       onChange={handlePageChange}

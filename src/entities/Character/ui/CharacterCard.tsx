@@ -25,6 +25,16 @@ const cardStyles = {
       .darken(0.2)
       .fade(0.5)}`,
   },
+  '&:hover .character-name': {
+    color: 'primary.main'
+  }
+}
+
+const nameStyles = {
+  maxWidth: 250,
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
 }
 
 interface CharacterCardProps {
@@ -51,7 +61,7 @@ export const CharacterCard = ({ characterId }: CharacterCardProps) => {
           component="img"
         />
         <CardContent>
-          <Typography gutterBottom variant="h6" component="div" align="center">
+          <Typography className="character-name" sx={nameStyles} variant="h6" component="div" align="center">
             {name}
           </Typography>
         </CardContent>
