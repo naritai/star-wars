@@ -33,7 +33,7 @@ export function CharactersPagination(): JSX.Element {
       count={resolvedCount}
       color="primary"
       size="large"
-      page={currentPage!}
+      page={currentPage}
       onChange={handlePageChange}
       disabled={disabled}
     />

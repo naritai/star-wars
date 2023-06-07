@@ -4,7 +4,8 @@ import { FetchStatus } from "shared/api/types";
 import { NormalizedCharacters, fetchCharacters } from "entities/character/api";
 import { StateSchema } from "app/providers/store-provider";
 
-const FIRST_PAGE = 1;
+const DEFAULT_PAGE = 1;
+const TOTAL_CHARACTERS = 82;
 
 export interface CharactersState extends EntityState<Character> {
   status: FetchStatus;
@@ -21,8 +22,8 @@ const initialState: CharactersState = charactersAdapter.getInitialState({
   status: FetchStatus.IDLE,
   error: null,
   count: 0,
-  countTotal: null,
-  currentPage: 1,
+  countTotal: TOTAL_CHARACTERS,
+  currentPage: DEFAULT_PAGE,
   search: '',
 })
 
@@ -35,8 +36,8 @@ export const charactersSlice = createSlice({
     },
     searchUpdated: (state, action: PayloadAction<string>) => {
       state.search = action.payload;
-      state.currentPage = FIRST_PAGE;
-      state.count = state.search === '' ? Number(state.countTotal) : state.count;
+      state.currentPage = DEFAULT_PAGE;
+      state.count = state.search === '' ? TOTAL_CHARACTERS : state.count;
     },
   },
   extraReducers: (builder) => {
@@ -49,7 +50,8 @@ export const charactersSlice = createSlice({
         charactersAdapter.setAll(state, items);
         state.status = FetchStatus.SUCCEDED;
         state.count = count;
-        state.countTotal = currentPage === 1 && state.search === '' ? count : state.countTotal;
+        // @ts-ignore
+        // state.currentPage = currentPage;
       })
       .addCase(fetchCharacters.rejected, (state, action) => {
         state.status = FetchStatus.ERROR;

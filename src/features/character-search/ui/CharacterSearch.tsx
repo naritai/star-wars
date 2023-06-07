@@ -9,12 +9,13 @@ import { charactersActions } from 'entities/character';
 import { useDebounce } from 'usehooks-ts';
 
 interface CharacterSeacrhProps { 
-  className?: string; 
+  className?: string;
+  defaultValue?: string;
 }
 
-export function CharacterSearch({ className }: CharacterSeacrhProps): JSX.Element {
+export function CharacterSearch({ className, defaultValue = '' }: CharacterSeacrhProps): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
-  const [searchValue, setSearchValue] = useState<string>('');
+  const [searchValue, setSearchValue] = useState<string>(defaultValue);
   const debouncedValue = useDebounce<string>(searchValue, 500);
 
   useEffect(() => {
@@ -28,8 +29,13 @@ export function CharacterSearch({ className }: CharacterSeacrhProps): JSX.Elemen
 
   return (
     <section className={classNames(cls.characterseacrh, {}, [className])}>
-      <Paper elevation={2} sx={{ padding: 2, width: '100%' }}>
-        <Input value={searchValue} placeholder="search character by name" onChange={handleSearch} />
+      <Paper elevation={2} sx={{ padding: 3, width: '100%' }}>
+        <Input
+          sx={{ width: '100%', fontSize: "1.3em" }}
+          value={searchValue}
+          placeholder="type character name..."
+          onChange={handleSearch}
+        />
       </Paper>
     </section>
   )

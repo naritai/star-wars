@@ -20,12 +20,19 @@ export default function CharactersPage({ className }: CharactersPageProps): JSX.
   const dispatch = useDispatch<AppDispatch>();
   const [params] = useSearchParams();
   const page = params.get('page');
+  const search = params.get('search');
 
   useEffect(() => {
     if (page) {
       dispatch(charactersActions.pageUpdated(Number(page)));
     }
-  }, [page, dispatch]);
+    if (search) {
+      dispatch(charactersActions.searchUpdated(search));
+    }
+    if (page || search) {
+      dispatch(fetchCharacters());
+    }
+  }, [page, search, dispatch]);
 
   useEffect(() => {
     if (status === FetchStatus.IDLE) {
@@ -35,7 +42,7 @@ export default function CharactersPage({ className }: CharactersPageProps): JSX.
 
   return (
     <section className={classNames(cls.characterspage, {}, [className])}>
-      <CharacterSearch /> 
+      <CharacterSearch defaultValue={search ?? ''} />
       <CharactersPagination />
       <CharacterList />
     </section>

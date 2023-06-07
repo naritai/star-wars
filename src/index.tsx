@@ -5,9 +5,9 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { themeOptions } from 'shared/config/themeConfig/themeConfig';
 import { StoreProvider } from 'app/providers/store-provider';
-import './app/styles/index.scss';
 import { ErrorBoundary } from 'app/providers/error-boundary';
 import { ErrorPage } from 'pages/error-page';
+import './app/styles/index.scss';
 
 const theme = createTheme(themeOptions);
 
@@ -20,7 +20,6 @@ root.render(
     <BrowserRouter>
       <ErrorBoundary fallback={<ErrorPage />}>
         <StoreProvider>
-          
             <ThemeProvider theme={theme}>
               <App />
             </ThemeProvider>
