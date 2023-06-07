@@ -15,4 +15,4 @@ export {
   editableCharacterCleared
 } from './model/slice/editableCharacterSlice';
 
-export { CHARACTERS_TEXT } from './constants';
+export { CHARACTERS_TEXT, DEFAULT_PAGE } from './constants';

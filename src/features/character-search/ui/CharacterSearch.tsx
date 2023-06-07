@@ -10,16 +10,15 @@ import { useDebounce } from 'usehooks-ts';
 
 interface CharacterSeacrhProps { 
   className?: string;
-  defaultValue?: string;
 }
 
-export function CharacterSearch({ className, defaultValue = '' }: CharacterSeacrhProps): JSX.Element {
+export function CharacterSearch({ className }: CharacterSeacrhProps): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
-  const [searchValue, setSearchValue] = useState<string>(defaultValue);
+  const [searchValue, setSearchValue] = useState<string>('');
   const debouncedValue = useDebounce<string>(searchValue, 500);
 
   useEffect(() => {
-    dispatch(charactersActions.searchUpdated(debouncedValue));
+    dispatch(charactersActions.searchUpdated({ query: debouncedValue}));
     dispatch(fetchCharacters());
   }, [debouncedValue, dispatch]);
 
