@@ -1,4 +1,5 @@
 import { classNames } from 'shared/lib/classNames';
+import PlanetLoader from './page-loader.svg';
 import cls from './Spinner.module.scss';
 
 interface SpinnerProps { 
@@ -8,13 +9,7 @@ interface SpinnerProps {
 export function Spinner({ className }: SpinnerProps): JSX.Element {
   return (
     <div className={classNames(cls.spinner, {}, [className])}>
-      <div className={cls.spinnerOuter}>
-        <div className={cls.spinnerInner}>
-        <div></div>
-        <div></div>
-        <div></div>
-        </div>
-      </div>
+      <img src={PlanetLoader} alt="planet spinner" />
     </div>
   )
 }

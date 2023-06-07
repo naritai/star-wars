@@ -32,7 +32,7 @@ export function CharacterList({ className }: CharacterListProps): JSX.Element {
     return <Message className={cls.offsetter} text={ERROR_TEXTS.GENERAL_ERROR} error={true} />
   }
 
-  if (characterIds.length === 0) {
+  if (status === FetchStatus.SUCCEDED && characterIds.length === 0) {
     return <Message className={cls.offsetter} text={CHARACTERS_TEXT.NO_CHARACTERS_FOUND} />
   }
 

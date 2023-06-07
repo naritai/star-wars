@@ -22,17 +22,17 @@ export function ErrorPage({ className }: ErrorPageProps): JSX.Element {
     <section className={classNames(cls.errorpage, {}, [className])}>
       <Box component="span" sx={{ display: 'flex'}}>
         <ReportOutlined sx={{ fontSize: 70 }} color="error" />
-        <Typography variant="h2">Oops!</Typography>
+        <Typography variant="h2" color="error">Oops!</Typography>
       </Box>
 
       <Box sx={centered}>
-        <Typography variant="h4">{ERROR_TEXTS.GENERAL_ERROR}</Typography>
-        <Typography color="secondary" variant="h6" sx={{ flexGrow: 1 }} className={classNames(cls.link)}>
-          Try reload the: {
-            <Link to="/" reloadDocument={true}>
-              Main Page
+        <Typography variant="h4" color="error">{ERROR_TEXTS.GENERAL_ERROR}</Typography>
+        <Typography color="error" variant="h6" sx={{ flexGrow: 1 }}>
+          🪄🪄🪄{
+            <Link to="/" reloadDocument={true} className={classNames(cls.link)}>
+              main page
             </Link>
-          }
+          }🪄🪄🪄
         </Typography>
       </Box>
     </section>

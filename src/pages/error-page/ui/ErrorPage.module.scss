@@ -3,13 +3,14 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  min-height: var(--min-page-height);
+  min-height: 100vh;
+  background: var(--bg-color-dark);
 }
 
 .link {
   font-size: 1.5em;
   text-decoration: none;
-  text-transform: uppercase;
+  color: #cc50da;
 
   &:hover {
     opacity: 0.8;

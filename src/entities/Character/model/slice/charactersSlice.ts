@@ -1,6 +1,6 @@
 import { EntityState, PayloadAction, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 import { Character } from "../types/characterSchema";
-import { FetchStatus } from "shared/api/types";
+import { FetchStatus } from "shared/api";
 import { NormalizedCharacters, fetchCharacters } from "entities/character/api";
 import { StateSchema } from "app/providers/store-provider";
 import { TOTAL_CHARACTERS, DEFAULT_PAGE } from "entities/character/constants";
@@ -34,6 +34,7 @@ export const charactersSlice = createSlice({
     },
     searchUpdated: (state, action: PayloadAction<string>) => {
       state.search = action.payload;
+      state.currentPage = DEFAULT_PAGE;
       state.count = state.search === '' ? TOTAL_CHARACTERS : state.count;
     },
   },

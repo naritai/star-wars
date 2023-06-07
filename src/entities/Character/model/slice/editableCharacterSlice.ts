@@ -1,19 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Character } from "../types/characterSchema";
-import { FetchStatus } from "shared/api/types";
+import { FetchStatus } from "shared/api";
 import { fetchCharacterById } from "entities/character/api";
 import { StateSchema } from "app/providers/store-provider";
 
 export interface EditableCharacterState {
   editableCharacter: Character | null;
-  editableCharacterError: string | null;
-  editableCharacterStatus: FetchStatus;
+  error: string | null;
+  status: FetchStatus;
 }
 
 const initialState: EditableCharacterState = {
   editableCharacter: null,
-  editableCharacterError: null,
-  editableCharacterStatus: FetchStatus.IDLE,
+  error: null,
+  status: FetchStatus.IDLE,
 }
 
 export const charactersSlice = createSlice({
@@ -27,15 +27,15 @@ export const charactersSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchCharacterById.pending, (state) => {
-        state.editableCharacterStatus = FetchStatus.LOADING;
+        state.status = FetchStatus.LOADING;
       })
       .addCase(fetchCharacterById.fulfilled, (state, action) => {
-        state.editableCharacterStatus = FetchStatus.SUCCEDED;
+        state.status = FetchStatus.SUCCEDED;
         state.editableCharacter = action.payload;
       })
       .addCase(fetchCharacterById.rejected, (state, action) => {
-        state.editableCharacterStatus = FetchStatus.ERROR;
-        state.editableCharacterError = action.error.message ?? null;
+        state.status = FetchStatus.ERROR;
+        state.error = action.error.message ?? null;
       })
   }
 });

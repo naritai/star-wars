@@ -1,8 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { StateSchema } from "app/providers/store-provider";
-import { buildEndpoint, normalizeCharacter, normalizeCharacters } from "./helpers";
+import { normalizeCharacter, normalizeCharacters } from "./helpers";
 import { selectCharactersState } from "../model/slice/charactersSlice";
 import { Character } from "../model/types/characterSchema";
+import { buildEndpoint } from "shared/api";
 
 export const CHARACTERS_API_BASE = 'https://swapi.dev/api/people';
 

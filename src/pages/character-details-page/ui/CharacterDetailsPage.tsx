@@ -1,18 +1,19 @@
 import { classNames } from 'shared/lib/classNames';
-import cls from './CharacterDetailsPage.module.scss';
 import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import { useParams } from 'react-router-dom';
+import { Box, Card, CardMedia } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
 import { AppDispatch, StateSchema } from 'app/providers/store-provider';
-import { Character, selectCharacterById, selectEditableCharacterState } from 'entities/character';
-import { useEffect, useState } from 'react';
+import { CHARACTERS_TEXT, Character, selectCharacterById, selectEditableCharacterState } from 'entities/character';
+import { useEffect } from 'react';
 import { EditCharacterForm } from 'features/edit-character';
-import { useLocalStorage } from 'usehooks-ts';
 import { useDispatch } from 'react-redux';
 import { FetchStatus } from 'shared/api/types';
 import { fetchCharacterById } from 'entities/character/api';
-import { editableCharacterCleared } from 'entities/character';
+import { Message } from 'shared/ui/message';
+import { ERROR_TEXTS } from 'shared/constants';
+import { Spinner } from 'widgets/spinner';
+import cls from './CharacterDetailsPage.module.scss';
 
 interface CharacterDetailsPageProps { 
   className?: string;
@@ -25,83 +26,28 @@ const gridStyles = {
   alignItems: 'center'
 }
 
-type StaicContentProps = {
-  character: Character;
-}
-
-function StaticContent({ character }: StaicContentProps) {
-  const [LSCharacter] = useLocalStorage<Partial<Character>>(`characters:${character.id}`, character);
-  const { name, height, mass, hairColor, skinColor, eyeColor, birthYear, gender } = LSCharacter;
-  return (
-    <>
-      <Typography>
-        Name: {name}
-      </Typography>
-      <Typography>
-        Height: {height}
-      </Typography>
-      <Typography>
-        Mass: {mass}
-      </Typography>
-      <Typography>
-        Hair color: {hairColor}
-      </Typography>
-      <Typography>
-        Skin color: {skinColor}
-      </Typography>
-      <Typography>
-        Eye Color: {eyeColor}
-      </Typography>
-      <Typography>
-        Birth year: {birthYear}
-      </Typography>
-      <Typography>
-        Gender: {gender}
-      </Typography>
-    </>
-  )
-}
-
 export default function CharacterDetailsPage({ className, edit = false }: CharacterDetailsPageProps): JSX.Element {
-  const [editting, setEditing] = useState(edit);
-  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const { id } = useParams();
-
   const character = useSelector(state => selectCharacterById(state as StateSchema, Number(id)));
-  const {
-    editableCharacter, editableCharacterError, editableCharacterStatus
-  } = useSelector(selectEditableCharacterState);
+  const { editableCharacter, error, status } = useSelector(selectEditableCharacterState);
 
   useEffect(() => {
-    const idleStatus = editableCharacterStatus === FetchStatus.IDLE;
-    if (!character && idleStatus && id) {
+    if (!character && status === FetchStatus.IDLE && id) {
       dispatch(fetchCharacterById(Number(id)));
     }
-  }, [editableCharacterStatus, dispatch, id, character]);
+  }, [status, dispatch, id, character]);
 
-
-  const handleEditCharacter = () => {
-    setEditing(true);
-    navigate(`/characters/${id}/edit`);
-  };
-
-  const handleEditCancel = () => {
-    setEditing(false);
-    navigate(`/characters/${id}`);
-    dispatch(editableCharacterCleared);
-  };
-
-  if (editableCharacterError) {
-    return <div>Something went wrong... sorry.</div>
+  if (status === FetchStatus.LOADING) {
+    return <Box className={cls.centerer}><Spinner /></Box>;
   }
 
-  if (editableCharacterStatus === FetchStatus.LOADING) {
-    return <div>Loading character...</div>
+  if (error) {
+    return <Message text={ERROR_TEXTS.GENERAL_ERROR} error={true} />;
   }
 
   if (!character && !editableCharacter) {
-    return <div>Character not found with provided id: {id}</div>
+    return <Message text={CHARACTERS_TEXT.NO_CHARACTERS_FOUND} />;
   }
 
   const resolvedCharacter = character || editableCharacter as Character;
@@ -122,18 +68,7 @@ export default function CharacterDetailsPage({ className, edit = false }: Charac
         </Grid>
 
         <Grid>
-          <Card sx={{ width: 300, height: 480 }}>
-            <CardContent>
-              {
-                editting 
-                  ? <EditCharacterForm character={resolvedCharacter} onCancel={handleEditCancel} /> 
-                  : <StaticContent character={resolvedCharacter} /> 
-              }
-            </CardContent>
-            <CardActions>
-              <Button size="large" color="secondary" onClick={handleEditCharacter}>EDIT</Button>
-            </CardActions>
-          </Card>
+          <EditCharacterForm character={resolvedCharacter} edit={edit} />
         </Grid>
       </Grid>
     </section>
