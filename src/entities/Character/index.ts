@@ -1,10 +1,16 @@
 export { CharacterCard } from './ui/CharacterCard';
 export { type Character } from './model/types/characterSchema';
-export { charactersReducer, charactersActions, type CharactersState } from './model/slice/characterSlice';
+export {
+  charactersReducer,
+  charactersActions,
+  type CharactersState,
+  selectAllCharacters,
+  selectCharacterById,
+  selectCharacterIds,
+  selectCharactersState,
+} from './model/slice/charactersSlice';
 
 export { 
-  getAllCharacters,
-  getCharacterById,
-  getCharactersStatus,
-  getCharactersError
-} from './model/selectors/characterSelectors';
+  selectEditableCharacterState,
+  editableCharacterCleared
+} from './model/slice/editableCharacterSlice';

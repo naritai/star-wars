@@ -1,51 +1,69 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { RootState } from "app/providers/store-provider";
-import { charactersActions } from "../model/slice/characterSlice";
-import { transformCharacter, transformCharacters } from "./helpers";
+import { StateSchema } from "app/providers/store-provider";
+import { normalizeCharacter, normalizeCharacters } from "./helpers";
+import { selectCharactersState } from "../model/slice/charactersSlice";
+import { Character } from "../model/types/characterSchema";
 
 export const CHARACTERS_API_BASE = 'https://swapi.dev/api/people';
 
+interface CharactersHTTPResponse {
+  body: ReadableStream<Uint8Array> | null;
+  bodyUsed: boolean;
+  headers: Headers;
+  ok: boolean;
+  redirected: boolean;
+  status: number;
+  statusText: string;
+  type: string;
+  url: string;
+}
+
+export interface NormalizedCharacters {
+  count: number,
+  items: Character[],
+  currentPage?: number;
+}
+
 export const fetchCharacterById = createAsyncThunk(
   'characters/fetchCharacterById',
-  async (id: number) => {
-    const response = await fetch(`${CHARACTERS_API_BASE}/${id}`);
+  async (id: number): Promise<Character> => {
+    const response: CharactersHTTPResponse = await fetch(`${CHARACTERS_API_BASE}/${id}`);
+    // @ts-ignore
     const parsed = await response.json();
-    const transformed = transformCharacter(parsed);
+    const transformed = normalizeCharacter(parsed);
     return transformed;
   }
-)
+);
+
+async function fetchCharactersBySearchQuery(search: string): Promise<CharactersHTTPResponse> {
+  const response: CharactersHTTPResponse = await fetch(`${CHARACTERS_API_BASE}/?search=${search}`);
+  return response;
+}
+
+async function fetchCharactersPage(currentPage: number): Promise<CharactersHTTPResponse> {
+  const response: CharactersHTTPResponse = await fetch(`${CHARACTERS_API_BASE}/?page=${currentPage}`);
+  return response;
+}
 
 export const fetchCharacters = createAsyncThunk(
   'characters/fetchCharacters',
-  async (_, { getState, dispatch }) => {
-  const { characters } = getState() as RootState;
-  const { search, page, cache, count } = characters;
-
-  if (!search && page && cache[page]) {
-    return { items: cache[page], count, page };
-  }
+  async (_, { getState }): Promise<NormalizedCharacters> => {
+  const { search, currentPage } = selectCharactersState(getState() as StateSchema);
 
   let response;
 
   if (search) {
-    response = await fetch(`${CHARACTERS_API_BASE}/?search=${search}`);
+    response = await fetchCharactersBySearchQuery(search);
   } else {
-    response = await fetch(`${CHARACTERS_API_BASE}/?page=${page}`);
+    response = await fetchCharactersPage(currentPage);
   }
-
+  // @ts-ignore
   const parsed = await response.json();
-  const transformed = transformCharacters(parsed.results);
-
-  if (page) {
-    dispatch(charactersActions.cacheUpdated(
-      { page, items: transformed }
-    ));
-  }
-
+  const normalized = normalizeCharacters(parsed.results);
   const payload = {
-    items: transformed,
+    items: normalized,
     count: parsed.count,
-    page
+    currentPage
   }
 
   return payload;

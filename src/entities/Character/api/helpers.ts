@@ -12,7 +12,7 @@ export function getCharacterImage(id: number): string {
   return `${CHARACTERS_IMAGE_BASE}/${id}.jpg`;
 }
 
-export function transformCharacter(raw: RawCharacter): Character {
+export function normalizeCharacter(raw: RawCharacter): Character {
   const { 
     birth_year, eye_color, gender, hair_color,
     height, mass, name, skin_color, url 
@@ -34,6 +34,6 @@ export function transformCharacter(raw: RawCharacter): Character {
   }
 }
 
-export function transformCharacters(raw: RawCharacter[]): Character[] {
-  return raw.map(transformCharacter);
+export function normalizeCharacters(raw: RawCharacter[]): Character[] {
+  return raw.map(normalizeCharacter);
 }

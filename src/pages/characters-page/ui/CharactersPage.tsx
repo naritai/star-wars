@@ -1,6 +1,6 @@
 import { classNames } from 'shared/lib/classNames';
 import cls from './CharactersPage.module.scss';
-import { charactersActions, getCharactersStatus } from 'entities/character';
+import { charactersActions, selectCharactersState } from 'entities/character';
 import { useDispatch, useSelector } from 'react-redux';
 import {  Pagination } from '@mui/material';
 import { ChangeEvent, useEffect } from 'react';
@@ -9,7 +9,6 @@ import { fetchCharacters } from 'entities/character/api';
 import { AppDispatch } from 'app/providers/store-provider';
 import { CharacterList } from 'widgets/character-list';
 import { CharacterSearch } from 'features/character-search';
-import { getCharactersCount, getCharactersPage } from 'entities/character/model/selectors/characterSelectors';
 import { useSearchParams } from 'react-router-dom';
 
 interface CharactersPageProps { 
@@ -21,8 +20,7 @@ const paginationStyles = {
 }
 
 function Paginator() {
-  const page = useSelector(getCharactersPage);
-  const count = useSelector(getCharactersCount);
+  const { currentPage, count } = useSelector(selectCharactersState);
   const dispatch = useDispatch<AppDispatch>();
 
   const handlePageChange = (_: ChangeEvent<unknown>, page: number) => {
@@ -42,14 +40,14 @@ function Paginator() {
       count={Math.ceil(count! / 10)}
       color="secondary"
       size="large"
-      page={page!}
+      page={currentPage!}
       onChange={handlePageChange}
     />
   )
 }
 
 export default function CharactersPage({ className }: CharactersPageProps): JSX.Element {
-  const status = useSelector(getCharactersStatus);
+  const { status } = useSelector(selectCharactersState);
   const dispatch = useDispatch<AppDispatch>();
   const [params] = useSearchParams();
   const page = params.get('page');

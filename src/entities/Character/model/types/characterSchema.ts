@@ -35,7 +35,3 @@ export interface Character {
   gender: Gender,
   image: string
 }
-
-export interface CharactersChache {
-  [key:string]: Character[];
-}

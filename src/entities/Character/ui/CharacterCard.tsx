@@ -4,6 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { AppRoutes } from "shared/config/routeConfig";
 import { useLocalStorage } from "usehooks-ts";
 import { Character } from "../model/types/characterSchema";
+import { EntityId } from "@reduxjs/toolkit";
+import { useSelector } from "react-redux";
+import { selectCharacterById } from "../model/slice/charactersSlice";
+import { StateSchema } from "app/providers/store-provider";
 
 const actionAreaStyles = {
   transition: '0.2s',
@@ -23,10 +27,15 @@ const cardStyles = {
   },
 }
 
-export const CharacterCard = ({ data }: any) => {
+interface CharacterCardProps {
+  characterId: EntityId;
+}
+
+export const CharacterCard = ({ characterId }: CharacterCardProps) => {
   const navigate = useNavigate();
-  const [LSCharacter] = useLocalStorage<Partial<Character>>(`characters:${data.id}`, data);
-  const { name, image, id } = LSCharacter ?? data;
+  const character = useSelector<StateSchema>(state => selectCharacterById(state, characterId));
+  const [LSCharacter] = useLocalStorage<Partial<Character>>(`characters:${characterId}`, character as Partial<Character>);
+  const { name, image, id } = LSCharacter ?? character;
 
   const handleCharacterClick = () => {
     navigate(`/${AppRoutes.CHARACTERS}/${id}`);

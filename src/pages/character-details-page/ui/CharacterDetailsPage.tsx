@@ -5,14 +5,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
 import { AppDispatch, StateSchema } from 'app/providers/store-provider';
-import { Character, getCharacterById } from 'entities/character';
+import { Character, selectCharacterById, selectEditableCharacterState } from 'entities/character';
 import { useEffect, useState } from 'react';
 import { EditCharacterForm } from 'features/edit-character';
 import { useLocalStorage } from 'usehooks-ts';
-import { getCharacterOnEdit, getCharacterOnEditError, getCharacterOnEditStatus } from 'entities/character/model/selectors/characterSelectors';
 import { useDispatch } from 'react-redux';
 import { FetchStatus } from 'shared/api/types';
 import { fetchCharacterById } from 'entities/character/api';
+import { editableCharacterCleared } from 'entities/character';
 
 interface CharacterDetailsPageProps { 
   className?: string;
@@ -68,17 +68,17 @@ export default function CharacterDetailsPage({ className, edit = false }: Charac
   const dispatch = useDispatch<AppDispatch>();
   const { id } = useParams();
 
-  const character = useSelector(state => getCharacterById(state as StateSchema, Number(id)));
-  const editableCharacter = useSelector(getCharacterOnEdit) as Character;
-  const editableCharcterError = useSelector(getCharacterOnEditError);
-  const editableCharcterStatus = useSelector(getCharacterOnEditStatus);
+  const character = useSelector(state => selectCharacterById(state as StateSchema, Number(id)));
+  const {
+    editableCharacter, editableCharacterError, editableCharacterStatus
+  } = useSelector(selectEditableCharacterState);
 
   useEffect(() => {
-    const idleStatus = editableCharcterStatus === FetchStatus.IDLE;
+    const idleStatus = editableCharacterStatus === FetchStatus.IDLE;
     if (!character && idleStatus && id) {
       dispatch(fetchCharacterById(Number(id)));
     }
-  }, [editableCharcterStatus, dispatch, id, character]);
+  }, [editableCharacterStatus, dispatch, id, character]);
 
 
   const handleEditCharacter = () => {
@@ -89,13 +89,14 @@ export default function CharacterDetailsPage({ className, edit = false }: Charac
   const handleEditCancel = () => {
     setEditing(false);
     navigate(`/characters/${id}`);
+    dispatch(editableCharacterCleared);
   };
 
-  if (editableCharcterError) {
+  if (editableCharacterError) {
     return <div>Something went wrong... sorry.</div>
   }
 
-  if (editableCharcterStatus === FetchStatus.LOADING) {
+  if (editableCharacterStatus === FetchStatus.LOADING) {
     return <div>Loading character...</div>
   }
 
@@ -103,7 +104,7 @@ export default function CharacterDetailsPage({ className, edit = false }: Charac
     return <div>Character not found with provided id: {id}</div>
   }
 
-  const resolvedCharacter = character || editableCharacter;
+  const resolvedCharacter = character || editableCharacter as Character;
   const { name, image } = resolvedCharacter;
 
   return (

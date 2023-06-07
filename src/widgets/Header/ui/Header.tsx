@@ -4,8 +4,21 @@ import { Box, AppBar, Toolbar, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 interface HeaderProps { 
-   className?: string; 
+  className?: string; 
 }
+
+{/* <nav>
+      <section>
+        <h1>Redux Essentials Example</h1>
+
+        <div className="navContent">
+          <div className="navLinks">
+            <Link to="/">Posts</Link>
+            <Link to="/users">Users</Link>
+          </div>
+        </div>
+      </section>
+    </nav> */}
 
 export function Header({ className }: HeaderProps): JSX.Element {
   return (

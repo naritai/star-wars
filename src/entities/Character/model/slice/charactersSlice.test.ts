@@ -1,5 +1,5 @@
 import { DeepPartial } from "@reduxjs/toolkit"
-import { CharactersState, charactersActions, charactersReducer } from "./characterSlice"
+import { CharactersState, charactersActions, charactersReducer } from "./charactersSlice"
 
 describe('characterSlice', () => {
   // TODO: uncomment when use real data
