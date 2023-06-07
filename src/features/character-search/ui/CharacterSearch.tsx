@@ -1,6 +1,6 @@
 import { classNames } from 'shared/lib/classNames/';
 import cls from './CharacterSeacrh.module.scss';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from 'app/providers/store-provider';
 import { fetchCharacters } from 'entities/character/api';
@@ -16,9 +16,15 @@ export function CharacterSearch({ className }: CharacterSeacrhProps): JSX.Elemen
   const dispatch = useDispatch<AppDispatch>();
   const [searchValue, setSearchValue] = useState<string>('');
   const debouncedValue = useDebounce<string>(searchValue, 500);
+  const firstUpdate = useRef(true);
 
   useEffect(() => {
-    dispatch(charactersActions.searchUpdated({ query: debouncedValue}));
+    // skip first useDebounce update
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
+    }
+    dispatch(charactersActions.searchUpdated(debouncedValue));
     dispatch(fetchCharacters());
   }, [debouncedValue, dispatch]);
 

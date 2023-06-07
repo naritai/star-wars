@@ -32,10 +32,8 @@ export const charactersSlice = createSlice({
     pageUpdated: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
     },
-    searchUpdated: (state, action: PayloadAction<{ query: string, setDefaultPage?: boolean }>) => {
-      const { query, setDefaultPage = true } = action.payload;
-      state.search = query;
-      state.currentPage = setDefaultPage ? DEFAULT_PAGE : state.currentPage;
+    searchUpdated: (state, action: PayloadAction<string>) => {
+      state.search = action.payload;
       state.count = state.search === '' ? TOTAL_CHARACTERS : state.count;
     },
   },

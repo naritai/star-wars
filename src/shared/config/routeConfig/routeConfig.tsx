@@ -1,6 +1,7 @@
 import CharacterDetailsPage from 'pages/character-details-page/ui/CharacterDetailsPage';
 import { CharactersPage } from 'pages/characters-page';
 import MainPage from 'pages/main-page/ui/MainPage';
+import { NotFoundPage } from 'pages/notfound-page';
 import { type RouteObject } from 'react-router-dom';
 
 export enum AppRoutes {
@@ -38,6 +39,6 @@ export const routeConfig: RouteObject[] = [
   },
   {
     path: RoutePath.notfound,
-    element: 'notfound',
+    element: <NotFoundPage />
   }
 ];
