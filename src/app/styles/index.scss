@@ -17,7 +17,7 @@ code {
 }
 
 .main-content {
-  min-height: calc(100vh - var(--main-header-height));
+  min-height: var(--min-page-height);
   width: 100%;
   margin: 0;
   padding: 20px;

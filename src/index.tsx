@@ -6,6 +6,8 @@ import { ThemeProvider, createTheme } from '@mui/material';
 import { themeOptions } from 'shared/config/themeConfig/themeConfig';
 import { StoreProvider } from 'app/providers/store-provider';
 import './app/styles/index.scss';
+import { ErrorBoundary } from 'app/providers/error-boundary';
+import { ErrorPage } from 'pages/error-page';
 
 const theme = createTheme(themeOptions);
 
@@ -15,12 +17,15 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <StoreProvider>
-      <BrowserRouter>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
-      </BrowserRouter>
-    </StoreProvider>
+    <BrowserRouter>
+      <ErrorBoundary fallback={<ErrorPage />}>
+        <StoreProvider>
+          
+            <ThemeProvider theme={theme}>
+              <App />
+            </ThemeProvider>
+        </StoreProvider>
+      </ErrorBoundary>
+    </BrowserRouter>
   </React.StrictMode>
 );

@@ -20,7 +20,7 @@ export function CharacterSearch({ className }: CharacterSeacrhProps): JSX.Elemen
   useEffect(() => {
     dispatch(charactersActions.searchUpdated(debouncedValue));
     dispatch(fetchCharacters());
-  }, [debouncedValue, dispatch])
+  }, [debouncedValue, dispatch]);
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
