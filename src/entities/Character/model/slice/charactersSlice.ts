@@ -4,6 +4,8 @@ import { FetchStatus } from "shared/api/types";
 import { NormalizedCharacters, fetchCharacters } from "entities/character/api";
 import { StateSchema } from "app/providers/store-provider";
 
+const FIRST_PAGE = 1;
+
 export interface CharactersState extends EntityState<Character> {
   status: FetchStatus;
   error: string | null;
@@ -18,7 +20,7 @@ const charactersAdapter = createEntityAdapter<Character>();
 const initialState: CharactersState = charactersAdapter.getInitialState({
   status: FetchStatus.IDLE,
   error: null,
-  count: 1,
+  count: 0,
   countTotal: null,
   currentPage: 1,
   search: '',
@@ -33,6 +35,7 @@ export const charactersSlice = createSlice({
     },
     searchUpdated: (state, action: PayloadAction<string>) => {
       state.search = action.payload;
+      state.currentPage = FIRST_PAGE;
       state.count = state.search === '' ? Number(state.countTotal) : state.count;
     },
   },
