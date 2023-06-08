@@ -1,5 +1,5 @@
-export { CharacterCard } from "./ui/CharacterCard";
-export { type Character } from "./model/types/characterSchema";
+export { CharacterCard } from './ui/CharacterCard';
+export { type Character } from './model/types/characterSchema';
 export {
   charactersReducer,
   charactersActions,
@@ -8,11 +8,11 @@ export {
   selectCharacterById,
   selectCharacterIds,
   selectCharactersState,
-} from "./model/slice/charactersSlice";
+} from './model/slice/charactersSlice';
 
 export {
   selectEditableCharacterState,
   editableCharacterCleared,
-} from "./model/slice/editableCharacterSlice";
+} from './model/slice/editableCharacterSlice';
 
-export { CHARACTERS_TEXT, DEFAULT_PAGE } from "./constants";
+export { CHARACTERS_TEXT, DEFAULT_PAGE } from './constants';

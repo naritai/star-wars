@@ -1,11 +1,11 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { StateSchema } from "app/providers/store-provider";
-import { normalizeCharacter, normalizeCharacters } from "./helpers";
-import { selectCharactersState } from "../model/slice/charactersSlice";
-import { Character } from "../model/types/characterSchema";
-import { buildEndpoint } from "shared/api";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { StateSchema } from 'app/providers/store-provider';
+import { normalizeCharacter, normalizeCharacters } from './helpers';
+import { selectCharactersState } from '../model/slice/charactersSlice';
+import { Character } from '../model/types/characterSchema';
+import { buildEndpoint } from 'shared/api';
 
-export const CHARACTERS_API_BASE = "https://swapi.dev/api/people";
+export const CHARACTERS_API_BASE = 'https://swapi.dev/api/people';
 
 interface CharactersHTTPResponse {
   [x: string]: any;
@@ -27,7 +27,7 @@ export interface NormalizedCharacters {
 }
 
 export const fetchCharacterById = createAsyncThunk(
-  "characters/fetchCharacterById",
+  'characters/fetchCharacterById',
   async (id: number): Promise<Character> => {
     const response: CharactersHTTPResponse = await fetch(
       `${CHARACTERS_API_BASE}/${id}`
@@ -40,7 +40,7 @@ export const fetchCharacterById = createAsyncThunk(
 );
 
 export const fetchCharacters = createAsyncThunk(
-  "characters/fetchCharacters",
+  'characters/fetchCharacters',
   async (_, { getState }): Promise<NormalizedCharacters> => {
     const { search, currentPage } = selectCharactersState(
       getState() as StateSchema

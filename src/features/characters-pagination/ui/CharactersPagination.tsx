@@ -1,9 +1,9 @@
-import { Pagination } from "@mui/material";
-import { AppDispatch } from "app/providers/store-provider";
-import { selectCharactersState, charactersActions } from "entities/character";
-import { fetchCharacters } from "entities/character/api";
-import { ChangeEvent, useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { Pagination } from '@mui/material';
+import { AppDispatch } from 'app/providers/store-provider';
+import { selectCharactersState, charactersActions } from 'entities/character';
+import { fetchCharacters } from 'entities/character/api';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 const DEFAULT_PAGINATION_COUNT = 10;
 

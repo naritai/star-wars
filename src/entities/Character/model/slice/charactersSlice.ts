@@ -3,12 +3,13 @@ import {
   PayloadAction,
   createEntityAdapter,
   createSlice,
-} from "@reduxjs/toolkit";
-import { Character } from "../types/characterSchema";
-import { FetchStatus } from "shared/api";
-import { NormalizedCharacters, fetchCharacters } from "entities/character/api";
-import { StateSchema } from "app/providers/store-provider";
-import { TOTAL_CHARACTERS, DEFAULT_PAGE } from "entities/character/constants";
+} from '@reduxjs/toolkit';
+import { Character } from '../types/characterSchema';
+import { FetchStatus } from 'shared/api';
+import { NormalizedCharacters, fetchCharacters } from 'entities/character/api';
+import { StateSchema } from 'app/providers/store-provider';
+import { TOTAL_CHARACTERS, DEFAULT_PAGE } from 'entities/character/constants';
+import { ERROR_TEXTS } from 'shared/constants';
 
 export interface CharactersState extends EntityState<Character> {
   status: FetchStatus;
@@ -27,11 +28,11 @@ const initialState: CharactersState = charactersAdapter.getInitialState({
   count: 0,
   countTotal: TOTAL_CHARACTERS,
   currentPage: DEFAULT_PAGE,
-  search: "",
+  search: '',
 });
 
 export const charactersSlice = createSlice({
-  name: "characters",
+  name: 'characters',
   initialState,
   reducers: {
     pageUpdated: (state, action: PayloadAction<number>) => {
@@ -40,7 +41,7 @@ export const charactersSlice = createSlice({
     searchUpdated: (state, action: PayloadAction<string>) => {
       state.search = action.payload;
       state.currentPage = DEFAULT_PAGE;
-      state.count = state.search === "" ? TOTAL_CHARACTERS : state.count;
+      state.count = state.search === '' ? TOTAL_CHARACTERS : state.count;
     },
   },
   extraReducers: (builder) => {
@@ -60,7 +61,7 @@ export const charactersSlice = createSlice({
       )
       .addCase(fetchCharacters.rejected, (state, action) => {
         state.status = FetchStatus.ERROR;
-        state.error = action.error.message ?? null;
+        state.error = action.error.message ?? ERROR_TEXTS.GENERAL_ERROR;
       });
   },
 });

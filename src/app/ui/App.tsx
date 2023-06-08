@@ -1,7 +1,7 @@
-import { AppRouter } from "app/providers/app-router";
-import { Header } from "widgets/header/ui/Header";
-import cls from "./App.module.scss";
-import { CssBaseline } from "@mui/material";
+import { AppRouter } from 'app/providers/app-router';
+import { Header } from 'widgets/header/ui/Header';
+import cls from './App.module.scss';
+import { CssBaseline } from '@mui/material';
 
 export function App() {
   return (

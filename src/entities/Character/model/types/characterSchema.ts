@@ -1,7 +1,7 @@
 export const enum Gender {
-  MALE = "male",
-  FEMALE = "female",
-  NOT_AVAILABLE = "n/a",
+  MALE = 'male',
+  FEMALE = 'female',
+  NOT_AVAILABLE = 'n/a',
 }
 
 export interface RawCharacter {

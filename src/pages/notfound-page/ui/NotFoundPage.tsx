@@ -1,7 +1,7 @@
-import { classNames } from "shared/lib/classNames";
-import cls from "./NotFoundPage.module.scss";
-import { Message } from "shared/ui/message";
-import { ERROR_TEXTS } from "shared/constants";
+import { classNames } from 'shared/lib/classNames';
+import cls from './NotFoundPage.module.scss';
+import { Message } from 'shared/ui/message';
+import { ERROR_TEXTS } from 'shared/constants';
 
 interface NotFoundPageProps {
   className?: string;

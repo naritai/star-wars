@@ -1,5 +1,5 @@
 export const enum CHARACTERS_TEXT {
-  NO_CHARACTERS_FOUND = "🤷🏻‍♂️ No characters found...",
+  NO_CHARACTERS_FOUND = '🤷🏻‍♂️ No characters found...',
 }
 
 export const DEFAULT_PAGE = 1;

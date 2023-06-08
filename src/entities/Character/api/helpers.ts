@@ -1,7 +1,7 @@
-import { RawCharacter, Character } from "../model/types/characterSchema";
+import { RawCharacter, Character } from '../model/types/characterSchema';
 
 export const CHARACTERS_IMAGE_BASE =
-  "https://starwars-visualguide.com/assets/img/characters";
+  'https://starwars-visualguide.com/assets/img/characters';
 
 export function parseId(url: string): number {
   const idRegExp = /\/([0-9]*)\/$/;

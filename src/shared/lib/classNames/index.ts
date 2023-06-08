@@ -13,5 +13,5 @@ export function classNames(
       .map(([clazz]) => clazz),
   ];
 
-  return classes.join(" ");
+  return classes.join(' ');
 }

@@ -1,13 +1,13 @@
-import { AppDispatch, StateSchema } from "app/providers/store-provider";
+import { AppDispatch, StateSchema } from 'app/providers/store-provider';
 import {
   Character,
   selectCharacterById,
   selectEditableCharacterState,
-} from "entities/character";
-import { fetchCharacterById } from "entities/character/api";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { FetchStatus } from "shared/api";
+} from 'entities/character';
+import { fetchCharacterById } from 'entities/character/api';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { FetchStatus } from 'shared/api';
 
 export function useCharacterFetcher(id: number) {
   const dispatch = useDispatch<AppDispatch>();

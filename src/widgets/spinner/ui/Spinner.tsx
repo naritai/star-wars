@@ -1,6 +1,6 @@
-import { classNames } from "shared/lib/classNames";
-import PlanetLoader from "./page-loader.svg";
-import cls from "./Spinner.module.scss";
+import { classNames } from 'shared/lib/classNames';
+import PlanetLoader from './page-loader.svg';
+import cls from './Spinner.module.scss';
 
 interface SpinnerProps {
   className?: string;

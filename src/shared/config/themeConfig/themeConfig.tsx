@@ -1,29 +1,29 @@
-import { ThemeOptions } from "@mui/material/styles";
+import { ThemeOptions } from '@mui/material/styles';
 
 export const themeOptions: ThemeOptions = {
   palette: {
-    mode: "dark",
+    mode: 'dark',
     primary: {
-      main: "#c02020",
-      contrastText: "#0f091e",
+      main: '#c02020',
+      contrastText: '#0f091e',
     },
     secondary: {
-      main: "rgba(230,148,58,0.71)",
-      contrastText: "#0f091e",
+      main: 'rgba(230,148,58,0.71)',
+      contrastText: '#0f091e',
     },
     warning: {
-      main: "#cc50da",
+      main: '#cc50da',
     },
     success: {
-      main: "#5bd662",
-      contrastText: "#2A2830",
+      main: '#5bd662',
+      contrastText: '#2A2830',
     },
     error: {
-      main: "#f4fb20eb",
+      main: '#f4fb20eb',
     },
-    divider: "#434343",
+    divider: '#434343',
     info: {
-      main: "#5eb6e6",
+      main: '#5eb6e6',
     },
   },
 };

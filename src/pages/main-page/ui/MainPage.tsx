@@ -1,6 +1,6 @@
-import { classNames } from "shared/lib/classNames";
-import cls from "./MainPage.module.scss";
-import { Typography } from "@mui/material";
+import { classNames } from 'shared/lib/classNames';
+import cls from './MainPage.module.scss';
+import { Typography } from '@mui/material';
 
 interface MainPageProps {
   className?: string;

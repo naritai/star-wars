@@ -1,6 +1,6 @@
-import { classNames } from "shared/lib/classNames";
-import cls from "./Message.module.scss";
-import { Typography } from "@mui/material";
+import { classNames } from 'shared/lib/classNames';
+import cls from './Message.module.scss';
+import { Typography } from '@mui/material';
 
 interface MessageProps {
   className?: string;
@@ -17,7 +17,7 @@ export function Message({
     <section className={classNames(cls.message, {}, [className])}>
       <Typography
         variant="h4"
-        color={error ? "error" : "primary"}
+        color={error ? 'error' : 'primary'}
         align="center"
       >
         {text}

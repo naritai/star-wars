@@ -1,1 +1,1 @@
-export { CharactersPagination } from "./ui/CharactersPagination";
+export { CharactersPagination } from './ui/CharactersPagination';

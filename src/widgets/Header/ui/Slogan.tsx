@@ -1,6 +1,6 @@
-import { classNames } from "shared/lib/classNames";
-import { useNavigate } from "react-router-dom";
-import cls from "./Header.module.scss";
+import { classNames } from 'shared/lib/classNames';
+import { useNavigate } from 'react-router-dom';
+import cls from './Header.module.scss';
 
 interface SloganProps {
   className?: string;
@@ -8,7 +8,7 @@ interface SloganProps {
 
 export function Slogan({ className }: SloganProps): JSX.Element {
   const navigate = useNavigate();
-  const handleClick = () => navigate("/");
+  const handleClick = () => navigate('/');
 
   return (
     <section

@@ -1,8 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { Character } from "../types/characterSchema";
-import { FetchStatus } from "shared/api";
-import { fetchCharacterById } from "entities/character/api";
-import { StateSchema } from "app/providers/store-provider";
+import { createSlice } from '@reduxjs/toolkit';
+import { Character } from '../types/characterSchema';
+import { FetchStatus } from 'shared/api';
+import { fetchCharacterById } from 'entities/character/api';
+import { StateSchema } from 'app/providers/store-provider';
 
 export interface EditableCharacterState {
   editableCharacter: Character | null;
@@ -17,7 +17,7 @@ const initialState: EditableCharacterState = {
 };
 
 export const charactersSlice = createSlice({
-  name: "editableCharacter",
+  name: 'editableCharacter',
   initialState,
   reducers: {
     editableCharacterCleared: (state) => {

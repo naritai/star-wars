@@ -1,9 +1,9 @@
-import { classNames } from "shared/lib/classNames";
-import { EditCharacterCard } from "features/edit-character";
-import cls from "./CharacterDetailsPage.module.scss";
-import { ErrorBoundary } from "app/providers/error-boundary";
-import { Message } from "shared/ui/message";
-import { ERROR_TEXTS } from "shared/constants";
+import { classNames } from 'shared/lib/classNames';
+import { EditCharacterCard } from 'features/edit-character';
+import cls from './CharacterDetailsPage.module.scss';
+import { ErrorBoundary } from 'app/providers/error-boundary';
+import { Message } from 'shared/ui/message';
+import { ERROR_TEXTS } from 'shared/constants';
 
 interface CharacterDetailsPageProps {
   className?: string;

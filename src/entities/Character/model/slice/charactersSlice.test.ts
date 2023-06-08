@@ -1,11 +1,11 @@
-import { DeepPartial } from "@reduxjs/toolkit";
+import { DeepPartial } from '@reduxjs/toolkit';
 import {
   CharactersState,
   charactersActions,
   charactersReducer,
-} from "./charactersSlice";
+} from './charactersSlice';
 
-describe("characterSlice", () => {
+describe('characterSlice', () => {
   // TODO: uncomment when use real data
   // test('should work with empty state', () => {
   //   expect(charactersReducer(undefined, charactersActions.charactersFiltered('Luke'))).toEqual({

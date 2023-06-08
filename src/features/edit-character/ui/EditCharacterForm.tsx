@@ -1,7 +1,7 @@
-import { classNames } from "shared/lib/classNames";
-import cls from "./EditCharacterForm.module.scss";
-import { Character, editableCharacterCleared } from "entities/character";
-import { useState, ChangeEvent, FormEvent, Fragment } from "react";
+import { classNames } from 'shared/lib/classNames';
+import cls from './EditCharacterForm.module.scss';
+import { Character, editableCharacterCleared } from 'entities/character';
+import { useState, ChangeEvent, FormEvent, Fragment } from 'react';
 import {
   Button,
   Card,
@@ -13,12 +13,12 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
-} from "@mui/material";
-import { Gender } from "entities/character/model/types/characterSchema";
-import { useLocalStorage } from "usehooks-ts";
-import { useNavigate } from "react-router-dom";
-import { AppDispatch } from "app/providers/store-provider";
-import { useDispatch } from "react-redux";
+} from '@mui/material';
+import { Gender } from 'entities/character/model/types/characterSchema';
+import { useLocalStorage } from 'usehooks-ts';
+import { useNavigate } from 'react-router-dom';
+import { AppDispatch } from 'app/providers/store-provider';
+import { useDispatch } from 'react-redux';
 
 interface EditCharacterFormProps {
   className?: string;

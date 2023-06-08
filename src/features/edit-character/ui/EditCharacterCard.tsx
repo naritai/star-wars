@@ -1,12 +1,12 @@
-import { Grid, Card, CardMedia, Box } from "@mui/material";
-import { EditCharacterForm } from "./EditCharacterForm";
-import { CHARACTERS_TEXT, Character } from "entities/character";
-import { useCharacterFetcher } from "pages/character-details-page/ui/useCharacterFetcher";
-import { useParams } from "react-router";
-import { ERROR_TEXTS } from "shared/constants";
-import { Spinner } from "widgets/spinner";
-import { Message } from "shared/ui/message";
-import cls from "./EditCharacterCard.module.scss";
+import { Grid, Card, CardMedia, Box } from '@mui/material';
+import { EditCharacterForm } from './EditCharacterForm';
+import { CHARACTERS_TEXT, Character } from 'entities/character';
+import { useCharacterFetcher } from 'pages/character-details-page/ui/useCharacterFetcher';
+import { useParams } from 'react-router';
+import { ERROR_TEXTS } from 'shared/constants';
+import { Spinner } from 'widgets/spinner';
+import { Message } from 'shared/ui/message';
+import cls from './EditCharacterCard.module.scss';
 
 interface EditCharacterCardProps {
   className?: string;
@@ -14,9 +14,9 @@ interface EditCharacterCardProps {
 }
 
 const gridStyles = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
 };
 
 export function EditCharacterCard({
@@ -54,7 +54,7 @@ export function EditCharacterCard({
       <Grid>
         <Card sx={{ width: 350 }}>
           <CardMedia
-            sx={{ height: 480, width: 350, objectFit: "cover" }}
+            sx={{ height: 480, width: 350, objectFit: 'cover' }}
             image={image}
             title={name}
             component="img"

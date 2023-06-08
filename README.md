@@ -29,6 +29,7 @@
 * Add Helmet
 * Configure github actions
 * Throw redux to trash busket. Use react-query (or other) + cache page requests
+* Optimize things when needed. Premature optimisation is evil.
 
 #### P. S.
 * I choose Redux to try redux toolkit (haven't used redux quite a lot). No big diff detected 🙂

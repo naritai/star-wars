@@ -1,27 +1,27 @@
-import { classNames } from "shared/lib/classNames";
-import cls from "./CharacterList.module.scss";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import { classNames } from 'shared/lib/classNames';
+import cls from './CharacterList.module.scss';
+import Grid from '@mui/material/Unstable_Grid2/Grid2';
 import {
   CharacterCard,
   selectCharacterIds,
   selectCharactersState,
-} from "entities/character";
-import { useSelector } from "react-redux";
-import { FetchStatus } from "shared/api/types";
-import { EntityId } from "@reduxjs/toolkit";
-import { Spinner } from "widgets/spinner";
-import { Message } from "shared/ui/message";
-import { CHARACTERS_TEXT } from "entities/character";
-import { ERROR_TEXTS } from "shared/constants";
+} from 'entities/character';
+import { useSelector } from 'react-redux';
+import { FetchStatus } from 'shared/api/types';
+import { EntityId } from '@reduxjs/toolkit';
+import { Spinner } from 'widgets/spinner';
+import { Message } from 'shared/ui/message';
+import { CHARACTERS_TEXT } from 'entities/character';
+import { ERROR_TEXTS } from 'shared/constants';
 
 interface CharacterListProps {
   className?: string;
 }
 
 const gridStyles = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
 };
 
 export function CharacterList({ className }: CharacterListProps): JSX.Element {

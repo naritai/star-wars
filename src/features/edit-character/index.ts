@@ -1,2 +1,2 @@
-export { EditCharacterForm } from "./ui/EditCharacterForm";
-export { EditCharacterCard } from "./ui/EditCharacterCard";
+export { EditCharacterForm } from './ui/EditCharacterForm';
+export { EditCharacterCard } from './ui/EditCharacterCard';

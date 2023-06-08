@@ -4,36 +4,36 @@ import {
   CardContent,
   CardMedia,
   Typography,
-} from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { AppRoutes } from "shared/config/routeConfig";
-import { useLocalStorage } from "usehooks-ts";
-import { Character } from "../model/types/characterSchema";
-import { EntityId } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
-import { selectCharacterById } from "../model/slice/charactersSlice";
-import { StateSchema } from "app/providers/store-provider";
+} from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { AppRoutes } from 'shared/config/routeConfig';
+import { useLocalStorage } from 'usehooks-ts';
+import { Character } from '../model/types/characterSchema';
+import { EntityId } from '@reduxjs/toolkit';
+import { useSelector } from 'react-redux';
+import { selectCharacterById } from '../model/slice/charactersSlice';
+import { StateSchema } from 'app/providers/store-provider';
 
 const actionAreaStyles = {
-  transition: "0.2s",
-  "&:hover": {
-    transform: "scale(1.03)",
+  transition: '0.2s',
+  '&:hover': {
+    transform: 'scale(1.03)',
   },
 };
 
 const cardStyles = {
   width: 250,
-  boxShadow: "none",
-  "&:hover .character-name": {
-    color: "orangered",
+  boxShadow: 'none',
+  '&:hover .character-name': {
+    color: 'orangered',
   },
 };
 
 const nameStyles = {
   maxWidth: 250,
-  textOverflow: "ellipsis",
-  whiteSpace: "nowrap",
-  overflow: "hidden",
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
 };
 
 interface CharacterCardProps {
@@ -59,7 +59,7 @@ export const CharacterCard = ({ characterId }: CharacterCardProps) => {
     <CardActionArea sx={actionAreaStyles} onClick={handleCharacterClick}>
       <Card sx={cardStyles}>
         <CardMedia
-          sx={{ height: 280, objectFit: "cover" }}
+          sx={{ height: 280, objectFit: 'cover' }}
           image={image}
           title={name}
           component="img"
