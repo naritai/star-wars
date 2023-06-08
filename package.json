@@ -32,19 +32,9 @@
     "@types/react-redux": "^7.1.25",
     "@types/react-router-dom": "^5.3.3",
     "eslint-config-prettier": "^8.8.0",
-    "husky": "^8.0.3",
+    "husky": "^8.0.0",
     "lint-staged": "^13.2.2",
     "prettier": "^2.8.8"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "prettier --write"
-    ]
   },
   "scripts": {
     "start": "react-scripts start",
@@ -53,6 +43,10 @@
     "eject": "react-scripts eject",
     "lint:ts": "eslint \"**/*.{ts,tsx}\"",
     "lint:ts:fix": "eslint \"**/*.{ts,tsx}\" --fix"
+  },
+  "lint-staged": {
+    "src/**/*.{css,scss,md}": "prettier --write",
+    "src/**/*.{ts,tsx}": ["prettier --write", "lint:ts:fix"]
   },
   "eslintConfig": {
     "extends": [

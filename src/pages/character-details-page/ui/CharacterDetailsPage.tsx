@@ -1,24 +1,24 @@
-import { classNames } from 'shared/lib/classNames';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { Box, Card, CardMedia } from '@mui/material';
-import Grid from '@mui/material/Unstable_Grid2/Grid2';
-import { AppDispatch, StateSchema } from 'app/providers/store-provider';
+import { classNames } from "shared/lib/classNames";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { Box, Card, CardMedia } from "@mui/material";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import { AppDispatch, StateSchema } from "app/providers/store-provider";
 import {
   CHARACTERS_TEXT,
   Character,
   selectCharacterById,
   selectEditableCharacterState,
-} from 'entities/character';
-import { useEffect } from 'react';
-import { EditCharacterForm } from 'features/edit-character';
-import { useDispatch } from 'react-redux';
-import { FetchStatus } from 'shared/api/types';
-import { fetchCharacterById } from 'entities/character/api';
-import { Message } from 'shared/ui/message';
-import { ERROR_TEXTS } from 'shared/constants';
-import { Spinner } from 'widgets/spinner';
-import cls from './CharacterDetailsPage.module.scss';
+} from "entities/character";
+import { useEffect } from "react";
+import { EditCharacterForm } from "features/edit-character";
+import { useDispatch } from "react-redux";
+import { FetchStatus } from "shared/api/types";
+import { fetchCharacterById } from "entities/character/api";
+import { Message } from "shared/ui/message";
+import { ERROR_TEXTS } from "shared/constants";
+import { Spinner } from "widgets/spinner";
+import cls from "./CharacterDetailsPage.module.scss";
 
 interface CharacterDetailsPageProps {
   className?: string;
@@ -26,9 +26,9 @@ interface CharacterDetailsPageProps {
 }
 
 const gridStyles = {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
 };
 
 export default function CharacterDetailsPage({
@@ -81,7 +81,7 @@ export default function CharacterDetailsPage({
         <Grid>
           <Card sx={{ width: 350 }}>
             <CardMedia
-              sx={{ height: 480, width: 350, objectFit: 'cover' }}
+              sx={{ height: 480, width: 350, objectFit: "cover" }}
               image={image}
               title={name}
               component="img"
