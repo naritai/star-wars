@@ -28,9 +28,8 @@
 * Write mobile styles
 * Character edit form validation
 * items per page select (pagination)
-* cancel requests conditionally with createAsyncThunk API
 * Use normalization library (like normalizr, but with support)
-* Refactor styles to be more consystent (where we use 'sx' props, where scss)
+* Refactor styles to be more consistent (where we use 'sx' props, where scss)
 * Add Helmet
 * Configure github actions
 * Throw redux to trash busket. Use react-query (or other) + cache page requests
