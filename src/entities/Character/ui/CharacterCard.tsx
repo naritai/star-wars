@@ -58,7 +58,7 @@ export const CharacterCard = ({ characterId }: CharacterCardProps) => {
 
   return (
     <CardActionArea sx={actionAreaStyles} onClick={handleCharacterClick}>
-      <Card sx={cardStyles} className={cls.test}>
+      <Card sx={cardStyles}>
         <CardMedia
           sx={{ height: 280, objectFit: "cover" }}
           image={image}

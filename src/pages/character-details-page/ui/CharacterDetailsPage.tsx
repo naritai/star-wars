@@ -1,24 +1,14 @@
 import { classNames } from "shared/lib/classNames";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Box, Card, CardMedia } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { AppDispatch, StateSchema } from "app/providers/store-provider";
-import {
-  CHARACTERS_TEXT,
-  Character,
-  selectCharacterById,
-  selectEditableCharacterState,
-} from "entities/character";
-import { useEffect } from "react";
+import { CHARACTERS_TEXT, Character } from "entities/character";
 import { EditCharacterForm } from "features/edit-character";
-import { useDispatch } from "react-redux";
-import { FetchStatus } from "shared/api/types";
-import { fetchCharacterById } from "entities/character/api";
 import { Message } from "shared/ui/message";
 import { ERROR_TEXTS } from "shared/constants";
 import { Spinner } from "widgets/spinner";
 import cls from "./CharacterDetailsPage.module.scss";
+import { useCharacterFetcher } from "./useCharacterFetcher";
 
 interface CharacterDetailsPageProps {
   className?: string;
@@ -35,22 +25,10 @@ export default function CharacterDetailsPage({
   className,
   edit = false,
 }: CharacterDetailsPageProps): JSX.Element {
-  const dispatch = useDispatch<AppDispatch>();
   const { id } = useParams();
-  const character = useSelector((state) =>
-    selectCharacterById(state as StateSchema, Number(id))
-  );
-  const { editableCharacter, error, status } = useSelector(
-    selectEditableCharacterState
-  );
+  const [character, isLoading, error] = useCharacterFetcher(Number(id));
 
-  useEffect(() => {
-    if (!character && status === FetchStatus.IDLE && id) {
-      dispatch(fetchCharacterById(Number(id)));
-    }
-  }, [status, dispatch, id, character]);
-
-  if (status === FetchStatus.LOADING) {
+  if (isLoading) {
     return (
       <Box className={cls.centerer}>
         <Spinner />
@@ -62,12 +40,11 @@ export default function CharacterDetailsPage({
     return <Message text={ERROR_TEXTS.GENERAL_ERROR} error={true} />;
   }
 
-  if (!character && !editableCharacter) {
+  if (!character) {
     return <Message text={CHARACTERS_TEXT.NO_CHARACTERS_FOUND} />;
   }
 
-  const resolvedCharacter = character || (editableCharacter as Character);
-  const { name, image } = resolvedCharacter;
+  const { name, image } = character as Character;
 
   return (
     <section className={classNames(cls.characterdetailspage, {}, [className])}>
@@ -90,7 +67,7 @@ export default function CharacterDetailsPage({
         </Grid>
 
         <Grid>
-          <EditCharacterForm character={resolvedCharacter} edit={edit} />
+          <EditCharacterForm character={character} edit={edit} />
         </Grid>
       </Grid>
     </section>

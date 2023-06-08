@@ -215,7 +215,7 @@ export function EditCharacterForm(props: EditCharacterFormProps): JSX.Element {
             size="large"
             onClick={handleEditStart}
           >
-            EDIT
+            Edit
           </Button>
         )}
       </CardActions>
