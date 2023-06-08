@@ -45,17 +45,17 @@ export default function CharactersPage({
     }
   }, [status, promiseQueue, dispatch]);
 
-  // track new requests and abort prev requests, except the last (newest)
+  // track new requests and abort prev requests
   useEffect(() => {
     return () => {
       while (promiseQueue.length > 1) {
         const promise = promiseQueue.shift();
-        if (promise) {
+        if (promise && status !== FetchStatus.SUCCEDED) {
           promise?.abort();
         }
       }
     };
-  }, [promiseCount, promiseQueue, dispatch]);
+  }, [promiseCount, promiseQueue, status, dispatch]);
 
   const handleFetchCharacters = useCallback(() => {
     const promise = dispatch(fetchCharacters());
