@@ -1,18 +1,22 @@
 # Star Wars Test Project
 
-## DEMO 
+## DEMO
+![Edit Character page](/public/screenshots/demo1.png?raw=true "Edit Character page")
 
-![Star Wars](/public/images/demo.png?raw=true "Character list page")
+#### Features
+* Search for star wars characters
+* Edit characters data & save locally (local storage)
 
-##### Bootstrapped with [CRA](https://github.com/facebook/create-react-app).
 
-## Scripts
-##### `npm start` - runs the app in the development mode
-##### `npm test` - launches the test runner
-##### `npm run build` - builds the app for production to the `build` folder
-##### `npm run eject` - one-way operation to unwrap CRA confiuration
+#### Used packages
+* [CRA](https://github.com/facebook/create-react-app)
+* [Material UI](https://mui.com/material-ui/getting-started/overview/)
+* [Redux Toolkit](https://redux-toolkit.js.org/)
+* [usehooks-ts](https://usehooks-ts.com/)
+* [SASS](https://sass-lang.com/)
+* Prettier/Eslint/Husky/lint-staged/pre-commit
 
-#### Todo
+#### TODO:
 * tests: e2e, snapshot, unit, integration
 * install and configure stylelint
 * configure theme & add theme switcher
@@ -22,4 +26,7 @@
 * refactor styles to be more consystent (where we use 'sx' props, where scss)
 * add Helmet
 * configure github actions
-* throw redux into trash busket, use some react-query + cache page requests
+* throw redux to trash busket. Use react-query (or other) + cache page requests
+
+#### P. S.
+* I choose Redux to try redux toolkit (haven't used redux quite a lot). There's not so big changes.
