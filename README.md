@@ -11,6 +11,7 @@
 #### Used packages / libs / api
 * [SWAPI.DEV](https://swapi.dev/)
 * [CRA](https://github.com/facebook/create-react-app)
+* [Feature Sliced Design](https://feature-sliced.design/ru/docs/)
 * [Material UI](https://mui.com/material-ui/getting-started/overview/)
 * [Redux Toolkit](https://redux-toolkit.js.org/)
 * [usehooks-ts](https://usehooks-ts.com/)

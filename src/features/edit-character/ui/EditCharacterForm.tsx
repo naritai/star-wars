@@ -86,12 +86,12 @@ export function EditCharacterForm(props: EditCharacterFormProps): JSX.Element {
   };
 
   return (
-    <Card sx={{ width: 300, height: 480 }}>
+    <Card
+      sx={{ width: 300, height: 480 }}
+      className={classNames(cls.editcharacterform, {}, [className])}
+    >
       <CardContent>
-        <form
-          onSubmit={handleEditSubmit}
-          className={classNames(cls.editcharacterform, {}, [className])}
-        >
+        <form onSubmit={handleEditSubmit}>
           <FormControl variant="standard" sx={formControlStyle}>
             <InputLabel id="name">Name</InputLabel>
             <Input

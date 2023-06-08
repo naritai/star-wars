@@ -13,7 +13,6 @@ import { EntityId } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { selectCharacterById } from "../model/slice/charactersSlice";
 import { StateSchema } from "app/providers/store-provider";
-import cls from "./CharacterCard.module.scss";
 
 const actionAreaStyles = {
   transition: "0.2s",
