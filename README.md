@@ -1,14 +1,15 @@
-# Star Wars Test Project
+# 💥🤖🪄 Star Wars Test Project 
 
 ## DEMO
-![Edit Character page](/public/screenshots/demo1.png?raw=true "Edit Character page")
+![C3-PO demo](/public/screenshots/demo-c3po.png?raw=true "C3-PO")
 
 #### Features
-* Search for star wars characters
-* Edit characters data & save locally (local storage)
+* 🔎 Search for star wars characters
+* 🖍 Edit characters data & save locally (local storage)
 
 
-#### Used packages
+#### Used packages / libs / api
+* [SWAPI.DEV](https://swapi.dev/)
 * [CRA](https://github.com/facebook/create-react-app)
 * [Material UI](https://mui.com/material-ui/getting-started/overview/)
 * [Redux Toolkit](https://redux-toolkit.js.org/)
@@ -17,16 +18,16 @@
 * Prettier/Eslint/Husky/lint-staged/pre-commit
 
 #### TODO:
-* tests: e2e, snapshot, unit, integration
-* install and configure stylelint
-* configure theme & add theme switcher
-* write mobile styles
+* Tests: e2e, snapshot, unit, integration
+* Install and configure stylelint
+* Configure theme & add theme switcher
+* Write mobile styles
 * Character edit form validation
-* use normalization library (like normalizr, but with support)
-* refactor styles to be more consystent (where we use 'sx' props, where scss)
-* add Helmet
-* configure github actions
-* throw redux to trash busket. Use react-query (or other) + cache page requests
+* Use normalization library (like normalizr, but with support)
+* Refactor styles to be more consystent (where we use 'sx' props, where scss)
+* Add Helmet
+* Configure github actions
+* Throw redux to trash busket. Use react-query (or other) + cache page requests
 
 #### P. S.
-* I choose Redux to try redux toolkit (haven't used redux quite a lot). There's not so big changes.
+* I choose Redux to try redux toolkit (haven't used redux quite a lot). No big diff detected 🙂
