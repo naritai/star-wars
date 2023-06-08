@@ -36,7 +36,7 @@ export function CharacterList({ className }: CharacterListProps): JSX.Element {
     return (
       <Message
         className={cls.offsetter}
-        text={ERROR_TEXTS.GENERAL_ERROR}
+        text={error ?? ERROR_TEXTS.GENERAL_ERROR}
         error={true}
       />
     );

@@ -2,11 +2,12 @@ import { Component, type ReactNode, type ErrorInfo } from 'react';
 
 interface ErrorBoundaryProps {
   children: ReactNode;
-  fallback: ReactNode;
+  fallback: (msg: string | null) => ReactNode;
 }
 
 interface ErrorBoundaryState {
   hasError: boolean;
+  message?: string | null;
 }
 
 export class ErrorBoundary extends Component<
@@ -15,7 +16,16 @@ export class ErrorBoundary extends Component<
 > {
   constructor(props: ErrorBoundaryProps) {
     super(props);
-    this.state = { hasError: false };
+    this.state = { hasError: false, message: null };
+  }
+
+  componentDidMount(): void {
+    window.addEventListener(
+      'unhandledrejection',
+      (event: PromiseRejectionEvent) => {
+        this.setState({ hasError: true, message: event?.reason });
+      }
+    );
   }
 
   static getDerivedStateFromError(): ErrorBoundaryState {
@@ -28,11 +38,11 @@ export class ErrorBoundary extends Component<
   }
 
   render(): ReactNode {
-    const { hasError } = this.state;
+    const { hasError, message } = this.state;
     const { children, fallback } = this.props;
 
     if (hasError) {
-      return fallback;
+      return fallback(message!);
     }
 
     return children;

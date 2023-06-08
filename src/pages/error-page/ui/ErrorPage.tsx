@@ -8,6 +8,7 @@ import { ERROR_TEXTS } from 'shared/constants';
 
 interface ErrorPageProps {
   className?: string;
+  message?: string | null;
 }
 
 const centered = {
@@ -17,7 +18,7 @@ const centered = {
   flexDirection: 'column',
 };
 
-export function ErrorPage({ className }: ErrorPageProps): JSX.Element {
+export function ErrorPage({ className, message }: ErrorPageProps): JSX.Element {
   return (
     <section className={classNames(cls.errorpage, {}, [className])}>
       <Box component="span" sx={{ display: 'flex' }}>
@@ -29,7 +30,7 @@ export function ErrorPage({ className }: ErrorPageProps): JSX.Element {
 
       <Box sx={centered}>
         <Typography variant="h4" color="error">
-          {ERROR_TEXTS.GENERAL_ERROR}
+          {message ?? ERROR_TEXTS.GENERAL_ERROR}
         </Typography>
         <Typography color="error" variant="h6" sx={{ flexGrow: 1 }}>
           🪄🪄🪄

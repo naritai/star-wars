@@ -24,7 +24,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <ErrorBoundary fallback={<ErrorPage />}>
+      <ErrorBoundary fallback={(msg) => <ErrorPage message={msg} />}>
         <StoreProvider>
           <ThemeProvider theme={theme}>
             <App />

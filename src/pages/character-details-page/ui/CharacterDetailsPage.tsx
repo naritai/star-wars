@@ -17,7 +17,11 @@ export default function CharacterDetailsPage({
   return (
     <section className={classNames(cls.characterdetailspage, {}, [className])}>
       <ErrorBoundary
-        fallback={<Message text={ERROR_TEXTS.GENERAL_ERROR} error={true} />}
+        fallback={(msg) => {
+          return (
+            <Message text={msg ?? ERROR_TEXTS.GENERAL_ERROR} error={true} />
+          );
+        }}
       >
         <EditCharacterCard edit={edit} />
       </ErrorBoundary>

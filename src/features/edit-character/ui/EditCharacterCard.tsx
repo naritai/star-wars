@@ -34,7 +34,7 @@ export function EditCharacterCard({
   }
 
   if (error) {
-    return <Message text={ERROR_TEXTS.GENERAL_ERROR} error={true} />;
+    return <Message text={error ?? ERROR_TEXTS.GENERAL_ERROR} error={true} />;
   }
 
   if (!character) {
