@@ -1,6 +1,9 @@
 # 💥🤖🪄 Star Wars Test Project 
 
 ## DEMO
+[https://star-wars-test-project.netlify.app/](https://star-wars-test-project.netlify.app/)
+
+## SCREEN
 ![C3-PO demo](/public/screenshots/demo-c3po.png?raw=true "C3-PO")
 
 #### Features
