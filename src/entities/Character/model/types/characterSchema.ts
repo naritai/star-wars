@@ -1,7 +1,7 @@
 export const enum Gender {
-  MALE = 'male',
-  FEMALE = 'female',
-  NOT_AVAILABLE = 'n/a'
+  MALE = "male",
+  FEMALE = "female",
+  NOT_AVAILABLE = "n/a",
 }
 
 export interface RawCharacter {
@@ -32,6 +32,6 @@ export interface Character {
   skinColor: string;
   eyeColor: string;
   birthYear: string;
-  gender: Gender,
-  image: string
+  gender: Gender;
+  image: string;
 }

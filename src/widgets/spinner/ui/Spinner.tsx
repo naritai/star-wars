@@ -1,9 +1,9 @@
-import { classNames } from 'shared/lib/classNames';
-import PlanetLoader from './page-loader.svg';
-import cls from './Spinner.module.scss';
+import { classNames } from "shared/lib/classNames";
+import PlanetLoader from "./page-loader.svg";
+import cls from "./Spinner.module.scss";
 
-interface SpinnerProps { 
-  className?: string; 
+interface SpinnerProps {
+  className?: string;
 }
 
 export function Spinner({ className }: SpinnerProps): JSX.Element {
@@ -11,5 +11,5 @@ export function Spinner({ className }: SpinnerProps): JSX.Element {
     <div className={classNames(cls.spinner, {}, [className])}>
       <img src={PlanetLoader} alt="planet spinner" />
     </div>
-  )
+  );
 }

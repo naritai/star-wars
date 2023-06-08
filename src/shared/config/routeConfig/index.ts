@@ -1,3 +1,3 @@
-import { routeConfig, AppRoutes } from './routeConfig';
+import { routeConfig, AppRoutes } from "./routeConfig";
 
 export { routeConfig, AppRoutes };

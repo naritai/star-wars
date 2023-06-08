@@ -24,7 +24,7 @@
   font-size: 42px;
   font-weight: bold;
   text-transform: uppercase;
-  font-family: 'Alfa Slab One', cursive;
+  font-family: "Alfa Slab One", cursive;
   margin-left: auto;
   cursor: pointer;
 }
@@ -33,14 +33,24 @@
   color: var(--primary-color);
   color: transparent;
   background-clip: text;
-  background-image: linear-gradient(71.78deg,#fc540c 27.87%,#E55807 52.56%,#FFB84C 74.58%);
+  background-image: linear-gradient(
+    71.78deg,
+    #fc540c 27.87%,
+    #e55807 52.56%,
+    #ffb84c 74.58%
+  );
 }
 
 .wars {
   color: var(--secondary-color);
   color: transparent;
   background-clip: text;
-  background-image: linear-gradient(71.78deg,#fc540c 27.87%,#E55807 52.56%,#FFB84C 74.58%);
+  background-image: linear-gradient(
+    71.78deg,
+    #fc540c 27.87%,
+    #e55807 52.56%,
+    #ffb84c 74.58%
+  );
 }
 
 .vertical {

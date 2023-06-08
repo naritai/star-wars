@@ -8,15 +8,13 @@ export function createReduxStore(initialState?: StateSchema) {
   return configureStore<StateSchema>({
     reducer: {
       characters: charactersReducer,
-      editableCharacter: editableCharacterReducer
+      editableCharacter: editableCharacterReducer,
     },
     preloadedState: initialState,
-    devTools: process.env.NODE_ENV === NODE_ENVS.DEV
-  })
+    devTools: process.env.NODE_ENV === NODE_ENVS.DEV,
+  });
 }
-
 
 export const store = createReduxStore();
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
-

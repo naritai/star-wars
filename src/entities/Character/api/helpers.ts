@@ -1,6 +1,7 @@
 import { RawCharacter, Character } from "../model/types/characterSchema";
 
-export const CHARACTERS_IMAGE_BASE = 'https://starwars-visualguide.com/assets/img/characters';
+export const CHARACTERS_IMAGE_BASE =
+  "https://starwars-visualguide.com/assets/img/characters";
 
 export function parseId(url: string): number {
   const idRegExp = /\/([0-9]*)\/$/;
@@ -13,9 +14,16 @@ export function getCharacterImage(id: number): string {
 }
 
 export function normalizeCharacter(raw: RawCharacter): Character {
-  const { 
-    birth_year, eye_color, gender, hair_color,
-    height, mass, name, skin_color, url 
+  const {
+    birth_year,
+    eye_color,
+    gender,
+    hair_color,
+    height,
+    mass,
+    name,
+    skin_color,
+    url,
   } = raw;
 
   const id = parseId(url);
@@ -31,7 +39,7 @@ export function normalizeCharacter(raw: RawCharacter): Character {
     skinColor: skin_color,
     eyeColor: eye_color,
     birthYear: birth_year,
-  }
+  };
 }
 
 export function normalizeCharacters(raw: RawCharacter[]): Character[] {

@@ -1,2 +1,2 @@
-export { buildEndpoint } from './helpers';
-export { FetchStatus } from './types';
+export { buildEndpoint } from "./helpers";
+export { FetchStatus } from "./types";
