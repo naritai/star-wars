@@ -1,10 +1,4 @@
-import {
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-  Typography,
-} from '@mui/material';
+import { Card, CardActionArea, CardContent, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from 'shared/config/routeConfig';
 import { useLocalStorage } from 'usehooks-ts';
@@ -13,6 +7,8 @@ import { EntityId } from '@reduxjs/toolkit';
 import { useSelector } from 'react-redux';
 import { selectCharacterById } from '../model/slice/charactersSlice';
 import { StateSchema } from 'app/providers/store-provider';
+import { LoadTrackableCardMedia } from 'shared/ui/load-trackable-image';
+import { PageLoader as Spinner } from 'widgets/page-loader';
 
 const actionAreaStyles = {
   transition: '0.2s',
@@ -27,6 +23,10 @@ const cardStyles = {
   '&:hover .character-name': {
     color: 'orangered',
   },
+};
+
+const cardMediaProps = {
+  sx: { height: 280, width: '100%', objectFit: 'cover' },
 };
 
 const nameStyles = {
@@ -58,11 +58,11 @@ export const CharacterCard = ({ characterId }: CharacterCardProps) => {
   return (
     <CardActionArea sx={actionAreaStyles} onClick={handleCharacterClick}>
       <Card sx={cardStyles}>
-        <CardMedia
-          sx={{ height: 280, objectFit: 'cover' }}
-          image={image}
-          title={name}
-          component="img"
+        <LoadTrackableCardMedia
+          cardMediaProps={cardMediaProps}
+          imageSrc={image!}
+          alt={name}
+          spinner={<Spinner />}
         />
         <CardContent>
           <Typography

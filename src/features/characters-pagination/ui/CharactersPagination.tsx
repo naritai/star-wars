@@ -4,12 +4,11 @@ import { selectCharactersState, charactersActions } from 'entities/character';
 import { fetchCharacters } from 'entities/character/api';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { FetchStatus } from 'shared/api';
 
 const DEFAULT_PAGINATION_COUNT = 10;
 
 export function CharactersPagination(): JSX.Element {
-  const { currentPage, count, status } = useSelector(selectCharactersState);
+  const { currentPage, count } = useSelector(selectCharactersState);
   const [resolvedCount, setResolvedCount] = useState(DEFAULT_PAGINATION_COUNT);
   const [disabled, setDisabled] = useState(true);
   const dispatch = useDispatch<AppDispatch>();
@@ -26,8 +25,6 @@ export function CharactersPagination(): JSX.Element {
     dispatch(fetchCharacters());
   };
 
-  const disablePagination = disabled || status === FetchStatus.LOADING;
-
   return (
     <Pagination
       variant="outlined"
@@ -38,7 +35,7 @@ export function CharactersPagination(): JSX.Element {
       size="large"
       page={currentPage}
       onChange={handlePageChange}
-      disabled={disablePagination}
+      disabled={disabled}
     />
   );
 }

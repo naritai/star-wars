@@ -18,6 +18,7 @@ export interface CharactersState extends EntityState<Character> {
   countTotal: number | null;
   search: string | null;
   currentPage: number;
+  currentRequestId: string | undefined;
 }
 
 const charactersAdapter = createEntityAdapter<Character>();
@@ -29,6 +30,7 @@ const initialState: CharactersState = charactersAdapter.getInitialState({
   countTotal: TOTAL_CHARACTERS,
   currentPage: DEFAULT_PAGE,
   search: '',
+  currentRequestId: undefined,
 });
 
 export const charactersSlice = createSlice({
@@ -46,19 +48,25 @@ export const charactersSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchCharacters.pending, (state) => {
+      .addCase(fetchCharacters.pending, (state, action) => {
+        const { requestId } = action.meta;
         state.status = FetchStatus.LOADING;
+        state.currentRequestId = requestId;
       })
-      .addCase(
-        fetchCharacters.fulfilled,
-        (state, action: PayloadAction<NormalizedCharacters>) => {
-          const { count, items, currentPage } = action.payload;
-          charactersAdapter.setAll(state, items);
-          state.status = FetchStatus.SUCCEDED;
-          state.count = count;
-          state.currentPage = currentPage ?? state.currentPage;
+      .addCase(fetchCharacters.fulfilled, (state, action: any) => {
+        const { requestId } = action.meta;
+
+        if (state.currentRequestId !== requestId) {
+          return;
         }
-      )
+
+        const { count, items, currentPage } = action.payload;
+        charactersAdapter.setAll(state, items);
+        state.status = FetchStatus.SUCCEDED;
+        state.count = count;
+        state.currentPage = currentPage ?? state.currentPage;
+        state.currentRequestId = undefined;
+      })
       .addCase(fetchCharacters.rejected, (state, action) => {
         state.status = FetchStatus.ERROR;
         state.error = action.error.message ?? ERROR_TEXTS.GENERAL_ERROR;

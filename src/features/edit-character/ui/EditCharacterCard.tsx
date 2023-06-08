@@ -1,12 +1,13 @@
-import { Grid, Card, CardMedia, Box } from '@mui/material';
+import { Grid, Card, Box } from '@mui/material';
 import { EditCharacterForm } from './EditCharacterForm';
 import { CHARACTERS_TEXT, Character } from 'entities/character';
 import { useCharacterFetcher } from 'pages/character-details-page/ui/useCharacterFetcher';
 import { useParams } from 'react-router';
 import { ERROR_TEXTS } from 'shared/constants';
-import { Spinner } from 'widgets/spinner';
 import { Message } from 'shared/ui/message';
 import cls from './EditCharacterCard.module.scss';
+import { LoadTrackableCardMedia } from 'shared/ui/load-trackable-image';
+import { PageLoader as Spinner } from 'widgets/page-loader';
 
 interface EditCharacterCardProps {
   className?: string;
@@ -17,6 +18,10 @@ const gridStyles = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+};
+
+const cardMediaProps = {
+  sx: { height: 535, width: 350, objectFit: 'cover' },
 };
 
 export function EditCharacterCard({
@@ -53,11 +58,11 @@ export function EditCharacterCard({
     >
       <Grid>
         <Card sx={{ width: 350 }}>
-          <CardMedia
-            sx={{ height: 535, width: 350, objectFit: 'cover' }}
-            image={image}
-            title={name}
-            component="img"
+          <LoadTrackableCardMedia
+            imageSrc={image}
+            alt={name}
+            cardMediaProps={cardMediaProps}
+            spinner={<Spinner />}
           />
         </Card>
       </Grid>
