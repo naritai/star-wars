@@ -87,7 +87,7 @@ export function EditCharacterForm(props: EditCharacterFormProps): JSX.Element {
 
   return (
     <Card
-      sx={{ width: 300, height: 480 }}
+      sx={{ width: 300, height: 535 }}
       className={classNames(cls.editcharacterform, {}, [className])}
     >
       <CardContent>
@@ -100,6 +100,7 @@ export function EditCharacterForm(props: EditCharacterFormProps): JSX.Element {
               value={name}
               onChange={handleValueChange}
               disabled={!editting}
+              sx={{ mb: 1 }}
             />
           </FormControl>
 
@@ -111,6 +112,7 @@ export function EditCharacterForm(props: EditCharacterFormProps): JSX.Element {
               value={height}
               onChange={handleValueChange}
               disabled={!editting}
+              sx={{ mb: 1 }}
             />
           </FormControl>
 
@@ -122,6 +124,7 @@ export function EditCharacterForm(props: EditCharacterFormProps): JSX.Element {
               value={mass}
               onChange={handleValueChange}
               disabled={!editting}
+              sx={{ mb: 1 }}
             />
           </FormControl>
 
@@ -133,6 +136,7 @@ export function EditCharacterForm(props: EditCharacterFormProps): JSX.Element {
               value={hairColor}
               onChange={handleValueChange}
               disabled={!editting}
+              sx={{ mb: 1 }}
             />
           </FormControl>
 
@@ -144,6 +148,7 @@ export function EditCharacterForm(props: EditCharacterFormProps): JSX.Element {
               value={skinColor}
               onChange={handleValueChange}
               disabled={!editting}
+              sx={{ mb: 1 }}
             />
           </FormControl>
 
@@ -155,6 +160,7 @@ export function EditCharacterForm(props: EditCharacterFormProps): JSX.Element {
               value={eyeColor}
               onChange={handleValueChange}
               disabled={!editting}
+              sx={{ mb: 1 }}
             />
           </FormControl>
 
@@ -166,6 +172,7 @@ export function EditCharacterForm(props: EditCharacterFormProps): JSX.Element {
               value={birthYear}
               onChange={handleValueChange}
               disabled={!editting}
+              sx={{ mb: 1 }}
             />
           </FormControl>
 
@@ -178,6 +185,7 @@ export function EditCharacterForm(props: EditCharacterFormProps): JSX.Element {
               label="Gender"
               onChange={handleGenderChange}
               disabled={!editting}
+              sx={{ mb: 1 }}
             >
               <MenuItem value={Gender.MALE}>Male</MenuItem>
               <MenuItem value={Gender.FEMALE}>Female</MenuItem>

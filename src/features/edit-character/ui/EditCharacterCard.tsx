@@ -54,7 +54,7 @@ export function EditCharacterCard({
       <Grid>
         <Card sx={{ width: 350 }}>
           <CardMedia
-            sx={{ height: 480, width: 350, objectFit: 'cover' }}
+            sx={{ height: 535, width: 350, objectFit: 'cover' }}
             image={image}
             title={name}
             component="img"
