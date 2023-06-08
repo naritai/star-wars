@@ -52,21 +52,33 @@ export const charactersSlice = createSlice({
         const { requestId } = action.meta;
         state.status = FetchStatus.LOADING;
         state.currentRequestId = requestId;
+        state.error = null;
       })
-      .addCase(fetchCharacters.fulfilled, (state, action: any) => {
-        const { requestId } = action.meta;
+      .addCase(
+        fetchCharacters.fulfilled,
+        (
+          state,
+          action: PayloadAction<
+            NormalizedCharacters,
+            string,
+            { requestId: string }
+          >
+        ) => {
+          const { requestId } = action.meta;
 
-        if (state.currentRequestId !== requestId) {
-          return;
+          if (state.currentRequestId !== requestId) {
+            return;
+          }
+
+          const { count, items, currentPage } = action.payload;
+          charactersAdapter.setAll(state, items);
+          state.status = FetchStatus.SUCCEDED;
+          state.count = count;
+          state.currentPage = currentPage ?? state.currentPage;
+          state.currentRequestId = undefined;
+          state.error = null;
         }
-
-        const { count, items, currentPage } = action.payload;
-        charactersAdapter.setAll(state, items);
-        state.status = FetchStatus.SUCCEDED;
-        state.count = count;
-        state.currentPage = currentPage ?? state.currentPage;
-        state.currentRequestId = undefined;
-      })
+      )
       .addCase(fetchCharacters.rejected, (state, action) => {
         state.status = FetchStatus.ERROR;
         state.error = action.error.message ?? ERROR_TEXTS.GENERAL_ERROR;
