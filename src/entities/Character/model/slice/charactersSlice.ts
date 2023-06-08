@@ -11,6 +11,8 @@ import { StateSchema } from 'app/providers/store-provider';
 import { TOTAL_CHARACTERS, DEFAULT_PAGE } from 'entities/character/constants';
 import { ERROR_TEXTS } from 'shared/constants';
 
+export const ABORT_ERROR_MSG = 'AbortError';
+
 export interface CharactersState extends EntityState<Character> {
   status: FetchStatus;
   error: string | null;
@@ -18,7 +20,6 @@ export interface CharactersState extends EntityState<Character> {
   countTotal: number | null;
   search: string | null;
   currentPage: number;
-  currentRequestId: string | undefined;
 }
 
 const charactersAdapter = createEntityAdapter<Character>();
@@ -30,7 +31,6 @@ const initialState: CharactersState = charactersAdapter.getInitialState({
   countTotal: TOTAL_CHARACTERS,
   currentPage: DEFAULT_PAGE,
   search: '',
-  currentRequestId: undefined,
 });
 
 export const charactersSlice = createSlice({
@@ -48,38 +48,26 @@ export const charactersSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchCharacters.pending, (state, action) => {
-        const { requestId } = action.meta;
+      .addCase(fetchCharacters.pending, (state) => {
         state.status = FetchStatus.LOADING;
-        state.currentRequestId = requestId;
         state.error = null;
       })
       .addCase(
         fetchCharacters.fulfilled,
-        (
-          state,
-          action: PayloadAction<
-            NormalizedCharacters,
-            string,
-            { requestId: string }
-          >
-        ) => {
-          const { requestId } = action.meta;
-
-          if (state.currentRequestId !== requestId) {
-            return;
-          }
-
+        (state, action: PayloadAction<NormalizedCharacters>) => {
           const { count, items, currentPage } = action.payload;
           charactersAdapter.setAll(state, items);
           state.status = FetchStatus.SUCCEDED;
           state.count = count;
           state.currentPage = currentPage ?? state.currentPage;
-          state.currentRequestId = undefined;
           state.error = null;
         }
       )
       .addCase(fetchCharacters.rejected, (state, action) => {
+        // return early, because we manually abort requests
+        if (action.error.name === ABORT_ERROR_MSG) {
+          return;
+        }
         state.status = FetchStatus.ERROR;
         state.error = action.error.message ?? ERROR_TEXTS.GENERAL_ERROR;
       });

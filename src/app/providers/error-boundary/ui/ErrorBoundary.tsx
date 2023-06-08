@@ -17,15 +17,22 @@ export class ErrorBoundary extends Component<
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false, message: null };
+    this.handlePromiseRejection = this.handlePromiseRejection.bind(this);
   }
 
   componentDidMount(): void {
-    window.addEventListener(
+    window.addEventListener('unhandledrejection', this.handlePromiseRejection);
+  }
+
+  componentWillUnmount(): void {
+    window.removeEventListener(
       'unhandledrejection',
-      (event: PromiseRejectionEvent) => {
-        this.setState({ hasError: true, message: event?.reason });
-      }
+      this.handlePromiseRejection
     );
+  }
+
+  handlePromiseRejection(event: PromiseRejectionEvent): void {
+    this.setState({ hasError: true, message: event?.reason });
   }
 
   static getDerivedStateFromError(): ErrorBoundaryState {

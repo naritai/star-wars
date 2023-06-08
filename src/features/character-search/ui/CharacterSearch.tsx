@@ -3,22 +3,23 @@ import cls from './CharacterSeacrh.module.scss';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from 'app/providers/store-provider';
-import { fetchCharacters } from 'entities/character/api';
 import { Input, Paper } from '@mui/material';
 import { charactersActions } from 'entities/character';
 import { useDebounce } from 'usehooks-ts';
 
 interface CharacterSeacrhProps {
   className?: string;
+  handleFetchCharacters: () => void;
 }
 
 export function CharacterSearch({
   className,
+  handleFetchCharacters,
 }: CharacterSeacrhProps): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
   const [searchValue, setSearchValue] = useState<string>('');
   const debouncedValue = useDebounce<string>(searchValue, 500);
-  const firstUpdate = useRef(true);
+  const firstUpdate = useRef<boolean>(true);
 
   useEffect(() => {
     // skip first useDebounce update
@@ -27,8 +28,8 @@ export function CharacterSearch({
       return;
     }
     dispatch(charactersActions.searchUpdated(debouncedValue));
-    dispatch(fetchCharacters());
-  }, [debouncedValue, dispatch]);
+    handleFetchCharacters();
+  }, [debouncedValue, handleFetchCharacters, dispatch]);
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);

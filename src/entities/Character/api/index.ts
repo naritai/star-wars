@@ -1,7 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { StateSchema } from 'app/providers/store-provider';
 import { normalizeCharacter, normalizeCharacters } from './helpers';
-import { selectCharactersState } from '../model/slice/charactersSlice';
+import {
+  ABORT_ERROR_MSG,
+  selectCharactersState,
+} from '../model/slice/charactersSlice';
 import { Character } from '../model/types/characterSchema';
 import { buildEndpoint } from 'shared/api';
 
@@ -41,14 +44,22 @@ export const fetchCharacterById = createAsyncThunk(
 
 export const fetchCharacters = createAsyncThunk(
   'characters/fetchCharacters',
-  async (_, { getState }): Promise<NormalizedCharacters> => {
+  async (
+    _,
+    { getState, signal, rejectWithValue }
+  ): Promise<NormalizedCharacters> => {
     const { search, currentPage } = selectCharactersState(
       getState() as StateSchema
     );
 
     const params = { search, page: currentPage };
     const endpoint = buildEndpoint(CHARACTERS_API_BASE, params);
-    const response: CharactersHTTPResponse = await fetch(endpoint);
+    const response: CharactersHTTPResponse = await fetch(endpoint, { signal });
+
+    if (signal.aborted) {
+      rejectWithValue({ name: ABORT_ERROR_MSG });
+    }
+
     const parsed = await response.json();
 
     let payload: NormalizedCharacters = {
