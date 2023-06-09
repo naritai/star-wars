@@ -81,6 +81,7 @@ export function EditCharacterForm(props: EditCharacterFormProps): JSX.Element {
 
   const handleEditCancel = () => {
     setEditing(false);
+    setFormData(rest);
     navigate(`/characters/${id}`);
     dispatch(editableCharacterCleared);
   };
