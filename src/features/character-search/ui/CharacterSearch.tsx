@@ -4,8 +4,9 @@ import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from 'app/providers/store-provider';
 import { Input, Paper } from '@mui/material';
-import { charactersActions } from 'entities/character';
+import { charactersActions, selectCharactersState } from 'entities/character';
 import { useDebounce } from 'usehooks-ts';
+import { useSelector } from 'react-redux';
 
 interface CharacterSeacrhProps {
   className?: string;
@@ -17,7 +18,8 @@ export function CharacterSearch({
   handleFetchCharacters,
 }: CharacterSeacrhProps): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
-  const [searchValue, setSearchValue] = useState<string>('');
+  const { search } = useSelector(selectCharactersState);
+  const [searchValue, setSearchValue] = useState<string>(search);
   const debouncedValue = useDebounce<string>(searchValue, 500);
   const firstUpdate = useRef<boolean>(true);
 

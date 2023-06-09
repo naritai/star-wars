@@ -18,7 +18,7 @@ export interface CharactersState extends EntityState<Character> {
   error: string | null;
   count: number;
   countTotal: number | null;
-  search: string | null;
+  search: string;
   currentPage: number;
 }
 
